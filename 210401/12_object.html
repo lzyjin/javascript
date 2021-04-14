@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 활용하기</title>
+</head>
+<body>
+    <h1>객체 선언 및 호출</h1>
+
+    <p>
+        자바스크립트에서 객체는 key(속성)/value(값) 형식으로 저장되며, 모든 자료형을 보관할 수 있다.
+        자료형 : 문자, 숫자, 배열, undefined, 객체, 함수, boolean
+    </p>
+
+
+
+    <h2>객체 생성 / 선언</h2>
+    <p>
+        {} 기호를 통해서 객체를 표시함.
+        let obj = { 키:값, 키:값, ... } : 객체
+    </p>
+
+    <script>
+
+        let obj = {} // 기본 객체 생성( 값이 없는 타입이 object인 변수가 생성된다 )
+
+        console.log(obj, typeof(obj)); // {} "object"
+
+        obj = {
+            name : "유병승",
+            age : 19,
+            height : 180.5,
+            birthday : new Date(),
+            hobby : ['코딩', '독서', '운동'],
+            item : {
+                name : '키보드',
+                weight : 0.5,
+            },
+
+            // 객체 내부에서 함수 쓰려면 화살표함수 쓰지말자
+            toString : function() {
+                return `${this.name}, ${this.age}, ${this.birthday}, ${this.hobby}`
+            }
+
+
+        }
+
+        console.log(obj);
+
+
+
+        // 객체의 각 프로퍼티에 접근하기
+        // 1. []를 이용해서 접근하기
+        // []로 접근시에는 []안에 문자 리터럴로 속성(키값)을 적어야한다.
+
+        console.log(obj['name']); // 유병승
+        console.log(obj['age']); // 19
+
+        // 2. .을 이용해서 접근하기
+        // .으로 접근할때는 그냥 바로 키값을 작성
+        console.log(obj.name); // 유병승
+        console.log(obj.age); // 19
+
+
+        // 배열 속성에 접근하기
+        console.log(obj['hobby']); // (3) ["코딩", "독서", "운동"]
+        console.log(obj['hobby'][0]); // 코딩
+        console.log(obj.hobby[0]); // 코딩
+
+        // 전체 순회? 
+        obj['hobby'].forEach( 
+            (v, i) => { console.log(v); }
+        );
+
+
+        // 함수 속성에 접근하기 ( 객체에 있는 함수 실행하기 )
+        console.log( obj['toString']() );
+        console.log( obj.toString() );
+
+
+        // 객체 내부의 객체에 접근하기
+        console.log( obj['item']['name'] ); // 키보드
+        console.log( obj.item.name ); // 키보드
+
+
+        // 객체 전체를 조회하는 방법 ( for문 이용 )
+        // 객체는 일반for문이나 while문으로는 순회가 불가능하다
+        // 왜?
+        // key값으로 접근해야하는데 ..
+
+        // 해결방법 : for in문 사용 
+        // for in문은 객체에 있는 키값을 순차적으로 변수에 넣어주는 foreach문이랑 비슷하다
+        // for in문은 객체에만 사용할 수 있다.( 배열에는 사용하지 않는다 )
+
+        for(let key in obj) {
+
+            if(typeof(obj[key]) == 'function') {
+
+                console.log( obj[key]() );
+            } else {
+
+                console.log( obj[key] ); // 이것만 사용한다
+                console.log( typeof(key) ); // 다 string 
+            }
+
+            // console.log( obj.key ); // undefined만 출력된다 
+            // 위 코드는 console.log( obj.'name' ); 와 동일하다 -> 정상적으로 접근할 수 없다 
+        }
+
+    </script>
+
+
+
+
+    <h2>객체에 속성을 추가/삭제 하기</h2>
+
+    <p>
+        자바스크립트에서 객체에 원하는 속성(key)을 추가하거나 있는 속성(key)을 삭제할 수 있다.
+        ex) 자바에서 런타임 시점에 멤버 변수를 추가하거나 삭제할 수 있다는 뜻 ! 
+    </p>
+
+    <script>
+
+        let addObj = {};
+
+        console.log(addObj); // {}
+
+        // 이미 생성한 객체에 속성 추가
+        // 속성을 추가할 때는 없는 key에 대입연산으로 값을 넣으면 추가된다
+
+        addObj['name'] = '김상현';
+        console.log(addObj); // {name: "김상현"}
+
+        addObj.gender = '여';
+        console.log(addObj); // {name: "김상현", gender: "여"}
+
+
+        // 있는 키값에 추가하면? 
+        addObj.gender = '남';
+        console.log(addObj); // {name: "김상현", gender: "남"}
+
+
+        // 속성을 삭제하려면?
+        // delete()함수를 이용해서 삭제 가능
+
+        delete(addObj['gender']);
+        console.log(addObj); // {name: "김상현"}
+
+
+        // 객체를 복사하려면?
+        let copyObj = addObj; // 얕은 복사 ( 주소값만 복사했음 )
+        console.log(copyObj); // {name: "김상현"}
+        console.log(addObj); // {name: "김상현"}
+
+        copyObj.height = 185.4;
+        console.log(copyObj); // {name: "김상현", height: 185.4}
+        console.log(addObj); // {name: "김상현", height: 185.4} 
+
+        // copyObj를 수정했는데 원본인 addObj도 수정됨
+
+        // 자바스크립트에서는 원본값을 유지하기 위해 깊은 복사를 많이 사용한다. 
+
+        // 깊은 복사
+        copyObj = {};
+
+        /*
+
+        for(let key in addObj) {
+
+            copyObj[key] = addObj[key];
+        }
+
+        console.log(copyObj); // {name: "김상현", height: 185.4}
+        console.log(addObj); // {name: "김상현", height: 185.4}
+       
+        copyObj.weight = 80.5;
+
+        console.log(copyObj); // {name: "김상현", height: 185.4, weight: 80.5}
+        console.log(addObj); // {name: "김상현", height: 185.4} 
+        // 원본값은 그대로 유지되었다
+
+        */
+
+
+        // ES6에서 spread연산자를 활용해서 깊은 복사하는 방법이 생겼다
+
+        copyObj = {...addObj};
+
+        console.log(copyObj); // {name: "김상현", height: 185.4}
+        console.log(addObj); // {name: "김상현", height: 185.4}
+
+        copyObj.weight = 80.5;
+
+        console.log(copyObj); // {name: "김상현", height: 185.4, weight: 80.5}
+        console.log(addObj); // {name: "김상현", height: 185.4} 
+
+
+    </script>
+
+
+
+    <h1>객체 배열에 대해 알아보자</h1>
+
+    <p>
+        json으로 여러개의 객체를 한번에 가져오니까 그 때 사용 
+        [ {}, {}, {} ] 형태 
+
+    </p>
+
+
+
+
+    <button onclick="addStudent();">학생정보 가져오기</button>
+    <div id="container">
+        <table id="stuData">
+
+        </table>
+    </div>
+
+    <script>
+        let s = {
+            name : "유병승", 
+            age : 19,
+            grade : 1,
+            gradePoint : { // 객체
+                coding : 100,
+                math : 10,
+                kor : 40,
+                eng : 40
+            }
+        }
+
+        let s1 = {
+            name : "김상현", 
+            age : 39,
+            grade : 3,
+            gradePoint : { 
+                coding : 90,
+                math : 100,
+                kor : 80,
+                eng : 90
+            }
+        }
+
+        let s2 = {
+            name : "김태희", 
+            age : 29,
+            grade : 2,
+            gradePoint : { 
+                coding : 80,
+                math : 90,
+                kor : 100,
+                eng : 90
+            }
+        }
+
+        // 객체 배열 생성 
+        let students = [];
+
+        students.push(s);
+        students.push(s1);
+        students.push(s2);
+
+        console.log(students);
+
+        // 객체 정보를 테이블형식으로 출력
+        let addStudent = () => {
+
+            let table = document.getElementById("stuData");
+
+            // thead만들기 
+            table.innerHTML = "<tr><th>이름</th><th>나이</th><th>점수</th><th>비고</th></tr>";
+            
+            // 중요 
+            for(let i=0; i < students.length; i++) {
+                let s = students[i];
+                let data = "<tr>";
+                    data += `<td>${s['name']}</td>`;
+                    data += `<td>${s['age']}</td>`;
+                    data += `<td>${s['grade']}</td>`;
+                    data += `<td>${s['gradePoint']}</td>`;
+                    data += "<td><button onclick='test();'>상세보기</button></td>";
+                    data += "</tr>";
+                table.innerHTML += data;
+            }
+        }
+
+        /*
+        div의 출력 결과 
+
+        유병승	19	1	[object Object]
+        김상현	39	3	[object Object]
+        김태희	29	2	[object Object]
+        */
+
+        function test() {
+            alert("힝 속았지?");
+        }
+    </script>
+
+
+
+
+    <h3>함수를 이용해서 객체를 생성하기</h3>
+
+    <p>
+        중복코드를 함수를 통해 줄일수 있다
+        2가지 방식
+        1. 함수 내부에서 객체를 생성해서 반환하는 방식 -> 함수 호출해서 이용
+        2. 생성자 함수를 선언하는 방식 -> new 연산자를 통해서 이용
+           함수명 첫글자를 대문자로 작성한다 
+    </p>
+    
+    <script>
+
+        // 1번 방식 ( 함수를 통해 객체 생성 )
+        function createStudent(name, age, grade, gradePoint) {
+            let s = {
+                name : name,
+                age : age, 
+                grade : grade, 
+                gradePoint : gradePoint
+            }
+
+            return s;
+        }
+
+        students.push( createStudent("김예진", 26, 2, { coding:90, math:90, kor:90, eng:90 }) );
+
+        console.log(students);
+
+
+
+        // 2번 방식 ( 자바처럼 생성자 함수 이용해서 객체 생성하기)
+        function Student(name, age, grade, gradePoint) {
+            this.name = name;
+            this.age = age;
+            this.grade = grade;
+            this.gradePoint = gradePoint;
+
+            this.toString = function() {
+                let gp = "";
+                for(let key in this.gradePoint) {
+                    gp += gradePoint[key]+' ';
+                }
+                return `${this.name}, ${this.age}, ${this.grade}, ${gp}`;
+            }
+
+        }
+        students = [new Student("유병승", 19, 1, {coding:100, math:100, kor:90, eng:90}),
+                    new Student("김상현", 29, 3, {coding:100, math:100, kor:100, eng:90}),
+                    new Student("김태희", 26, 2, {coding:100, math:100, kor:90, eng:100})];
+
+        console.log(students);
+
+        for(let i=0; i < students.length; i++) {
+
+            console.log(students[i].toString()); // 이렇게 쓰는걸 더 많이 사용한다 
+
+            // for(let key in students[i]) {
+
+            //     if(key == 'toString') {
+
+            //         console.log(students[i][key]());
+            //     }
+
+            // }
+        }
+
+    </script>
+
+
+
+
+    <h3>자바스크립트에서 캡슐화처리와 상속처리</h3>
+
+    <p>
+        캡슐화 : 직접접근 불가능하게 하고, get과 set함수를 통해서만 데이터를 입력 출력 할 수 있게 하는 것 
+        클로저 : 지역변수를 외부에서 접근할 수 있게 하는 기술 
+    </p>
+
+    <input type="text" id="userId" placeholder="아이디 입력 4글자 이상"><br>
+    <input type="password" name="" id="pw" placeholder="패스워드 입력"><br>
+    <input type="email" name="" id="email" placeholder="이메일"><br>
+    <button onclick="addMember();">회원가입</button>
+
+    <script>
+
+
+
+        let su1 = new Student("장혜린", 26, 2,{coding:100, math:100, kor:100, eng:100} );
+        console.log(su1.name); // 장혜린
+
+        su1.name = "정혜린";
+        console.log(su1.name); // 정혜린
+
+        // 값 수정이 가능함 -> 캡슐화 필요 
+
+        console.log(su1);
+
+        function Member(id1, pw1, name1,  email1) {
+
+            // this.id = id; 이렇게 하면 Member라는 객체의 속성이 됌 
+
+            let id = id1; // id를 지역변수로 만듦 
+            let pw = pw1;
+            let name = name1;
+            let email = email1;
+
+            this.getId = function() { // 함수 바깥에서 지역변수인 id에 접근하기 위해 
+                return id;
+            }
+
+            this.setId = function(id1) {
+
+                if(id1.length < 4) {
+                    alert('아이디는 4글자 이상 입력하세요');
+                } else {
+                    id = id1;
+                }
+                
+            }
+            this.getId = function() {
+                return id;
+            }
+
+        }
+
+        let m = new Member("admin", "1234", "관리자", "admin@admin.com");
+
+        console.log(m);
+
+        console.log(m.getId()); // admin 
+
+        // 아이디 세팅
+        m.setId("user01");
+        console.log(m.getId()); // user01
+
+        console.log(m);
+
+
+        function addMember() {
+
+            let id = document.getElementById("userId").value;
+            let pw = document.getElementById("pw").value;
+            let email = document.getElementById("email").value;
+
+            let m = new Member(id, pw, email);
+
+            console.log(m); // 캡슐화라서 아무것도 출력되지 않음 
+            console.log(m.getId()); // 입력한 아이디가 출력된다
+        }
+
+    </script>
+
+
+
+
+    <h3>상속 적용하기</h3>
+    <p>
+        상속 : 이미 작성되어 있는 객체를 가져다 쓰는 것. 
+    </p>
+
+    <script>
+
+        function Book(title, price, discountRate) {
+
+            this.title = title;
+            this.price = price;
+            this.discountRate = discountRate;
+
+            // this.getSalePrice = function() { // 공용으로 쓸 이 함수는 함수 바깥에 함수의 원시타입인 프로토타입으로 등록해서 중복코드 줄임
+
+            //     return price - (price * discountRate);
+            // }
+        }
+
+        // 공용사용함수를 prototype으로 등록하기
+        Book.prototype.getSalePrice = function() {
+
+            return this.price - (this.price * this.discountRate);
+        }
+
+
+        let b = new Book('자바의 정석', 37000, 0.2); 
+
+        console.log(`${b.title} ${b.price} ${b.getSalePrice()}`); // 자바의 정석 37000 29600
+
+        let b1 = new Book("oracle", 30000, 0.2);
+
+        console.log(b);
+        console.log(b1);
+
+
+        // Book을 상속받은 Novel 객체 만들기
+
+        function Novel(title, price, discountRate, type) {
+
+            this.base = Book;
+            this.base(title, price, discountRate);
+            this.type = type;
+        }
+
+
+        // prototype 상속받기
+        Novel.prototype = Book.prototype;
+        Novel.prototype.getSalePrice = function() {
+            return 'novel이 변경';
+        }
+
+        let n = new Novel("해리포터", 35000, 0.4, '소설');
+
+        console.log(n);
+
+        console.log(`${n.title} ${n.price} ${n.getSalePrice()} ${n.type}`); // 해리포터 35000 21000 소설
+    </script>
+
+</body>
+</html>

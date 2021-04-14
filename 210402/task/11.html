@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 11</title>
+    <style>
+        legend{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>객체 실습 문제</h1>
+
+    <fieldset>
+        <legend>출력창</legend>
+        <p id="content"></p>
+    </fieldset>
+    <br>
+    <button onclick="input();">입력</button>
+    <button onclick="output();">출력</button>
+
+    <script>
+        let member = {};
+        const input = () => {
+
+            var name = prompt("이름 입력 : ");
+            var age = prompt("나이 입력 : ");
+            var address = prompt("주소 입력 : ");
+
+            member = {
+                name: name,
+                age: age,
+                address: address
+            };
+
+
+        }
+
+        const output = () => {
+
+            // console.log(member);
+
+            document.getElementById("content").innerHTML += `이름 : ${member.name}<br>`;
+            document.getElementById("content").innerHTML += `나이 : ${member.age}세<br>`;
+            document.getElementById("content").innerHTML += `주소 : ${member.address}`;
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8번문제 제이쿼리로 풀기</title>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <style>
+        table{
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+        th, tr, td{
+            border: 1px black solid;
+        }
+        th{
+            color: coral;
+            font-weight: normal;
+            background-color: rgb(255, 248, 230);
+            text-align: right;
+        }
+        th>p{
+            color: blue;
+            font-style: italic;
+            font-size:x-small
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>거래처 등록</h1>
+     
+    <table>
+        <tr>
+            <th>거래처명</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>전화번호</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>품명(중고품)</th>
+            <td>
+                <input type="checkbox" name="" id="">메인보드
+                <input type="checkbox" name="" id="">모니터
+                <input type="checkbox" name="" id="">프린터
+                <input type="checkbox" name="" id="">하드디스크
+                <input type="checkbox" name="" id="">메모리
+                <input type="checkbox" name="" id="">CPU
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <p>모두선택/해제<input type="checkbox" name="" id="selectAll" onclick="selectAll();"></p>
+                품명(수입산)
+            </th>
+            <td id="import">
+                <input type="checkbox" name="" id="">메인보드
+                <input type="checkbox" name="" id="">모니터
+                <input type="checkbox" name="" id="">프린터
+                <input type="checkbox" name="" id="">하드디스크
+                <input type="checkbox" name="" id="">메모리
+                <input type="checkbox" name="" id="">CPU
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    <button>등록</button>
+                    <button>취소</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        const selectAll = () => {
+
+            if($("td#import").children().attr("checked") != "checked") {
+
+                $("td#import").children().attr("checked", "checked");
+
+            } else {
+
+                $("td#import").children().removeAttr("checked");
+            }
+            
+        }
+    </script>
+
+</body>
+</html>

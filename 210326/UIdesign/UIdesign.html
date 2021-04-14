@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            width: 100%;
+            margin: auto;
+        }
+        nav{
+            border: 1px steelblue solid;
+            background-color: lightsteelblue;
+            padding: 5px;
+            margin: 5px;
+            height: 50px;
+        }
+        #login{
+            display: inline-block !important;
+            position: absolute !important;
+            left: 70% !important;
+        }
+        
+        main{
+            border: 1px steelblue solid;
+            background-color: lightsteelblue;
+            padding: 0 0 0 0;
+            margin: 5px;
+
+            display: flex;
+        }
+        .content{
+            
+            /* display: flex;
+            justify-content: space-between; */
+            
+            /* width: 450px; */
+            width: 60%;
+            border: 1px lightgray solid;
+            padding: 5px;
+            background-color: rgb(231, 231, 231);
+            margin: 5px;
+            
+        }
+        .content:last-child{
+            margin-left: 0;
+        }
+        table{
+            width: 98%;
+            height: 60%;
+
+            margin: 0 0 0 0;
+            border-top: 2px black solid;
+            border-bottom: 2px black solid;
+            border-collapse: collapse;
+            position: relative;
+            top: 10%;
+            left: 1%;
+        }
+        .content>p{
+            display: inline;
+            position: relative;
+            top: 10%;
+            left: 5%;
+
+        }
+        footer{
+            border: 1px steelblue solid;
+            background-color: lightsteelblue;
+            margin: 5px;
+            height: 70px;
+        }
+        footer p{
+            text-align: center;
+            vertical-align: middle;
+            margin: 0 0 0 0;
+            padding: 20px;
+        }
+        
+        tbody{
+            border-top: 2px black solid;
+        }
+        .outermenu{
+            border: 1px lightgray solid;
+            background-color: rgb(231, 231, 231);
+        }
+        
+        thead{
+            background-color: gray;
+            margin: 0 0 0 0;
+        }
+        th{
+            padding: 0 0 0 0;
+            color: white;
+        }
+        tbody>tr>td:first-child{
+            text-align: center;
+        }
+        footer>div{
+            background-color: rgb(231, 231, 231);
+            padding: 0 0 0 0;
+            margin: 5px;
+        }
+        #menu{
+            height: 35px;
+            margin-top: 15px;
+            display: flex;
+        }
+        #logo{
+            border: black solid 1px;
+            background-image: url("logo.jpg");
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+            margin-left: 20px !important;
+            margin-right: 20px !important;
+        }
+        #menu * {
+            margin: 0 10px 0 10px;
+            
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="outermenu">
+
+            <div id="menu">
+
+                <!-- <img src="../210326/logo.jpg" id="logo" width="20px" height="20px"> -->
+
+                <div id="logo"></div>
+
+                <div>메뉴1</div>
+                <div>메뉴2</div>
+                <div>메뉴3</div>
+                
+                <div id="login">
+                    ID<input type="text" id="userId" size="5">
+                    PW<input type="password" id="userPw" size="5">
+                    <button>로그인</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <main>
+        <div class="content">
+            <p>최근에 등록된 게시글 1</p>
+            <br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>게시글 5</td>
+                        <td>02/25</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>게시글 4</td>
+                        <td>02/25</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>게시글 3</td>
+                        <td>02/23</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>게시글 2</td>
+                        <td>02/23</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>게시글 1</td>
+                        <td>02/22</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br><br><br><br>
+        </div>
+
+        <div class="content">
+            <p>최근에 등록된 게시글 2</p>
+            <br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>게시글 5</td>
+                        <td>02/26</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>게시글 4</td>
+                        <td>02/25</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>게시글 3</td>
+                        <td>02/24</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>게시글 2</td>
+                        <td>02/23</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>게시글 1</td>
+                        <td>02/23</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br><br><br><br>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p>Copyright © Create By XXXXX</p>
+        </div>
+    </footer>
+
+</body>
+</html>

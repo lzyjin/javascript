@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5번 문제 제이쿼리로 풀기</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        div#result{
+            border: 1px black solid;
+            background-color: rgb(255, 252, 179);
+            width: 500px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>실습 문제 1</h1>
+
+    구매자 : <input id="consumer" type="text"><br><br>
+    상품명 : <input id="product" type="text"><br><br>
+    가격 : <input id="price" type="text">만원<br><br>
+
+    <button onclick="print();">입력값 출력하기</button><br><br>
+
+    <div id="result"></div>
+
+    <script>
+        const print = () => {
+
+            let consumer = $("input#consumer").val();
+            let product = $("input#product").val();
+            let price = $("input#price").val();
+
+            $("div#result").html(`구입자 : ${consumer}<br>구입상품 : ${product}<br>구매가격 : ${price}만원`);
+        }
+    </script>
+</body>
+</html>

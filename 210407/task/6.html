@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 2</title>
+</head>
+<body>
+    <h1>실습문제2</h1>
+    
+    <fieldset>
+        <legend>납품정보</legend>
+        <ul>
+            <li>상품명 : 
+                <select name="" id="productname">
+                    <option value="apple">apple</option>
+                    <option value="orange">orange</option>
+                    <option value="grape">grape</option>
+                    <option value="cherry">cherry</option>
+                </select>
+                <br>
+            </li>
+            <li>
+                납품수량 : <input id="count" type="text"><br>
+            </li>
+            <li>
+                납품등급 : <input type="range" id="grade" value="0" min="0" max="10" step="2"></input><br>
+            </li>
+            <li>
+                기타사항 : <textarea name="" id="etc" cols="30" rows="10"></textarea>
+            </li>
+        </ul>
+    </fieldset>
+
+    <button onclick="send();">send message</button>
+
+    <script>
+        const send = () => {
+
+            let productname = document.getElementById("productname").value;
+            let count = document.getElementById("count").value;
+            let grade = document.getElementById("grade").value;
+            let etc = document.getElementById("etc").value;
+
+            confirm(`상품명 : ${productname}\n납품등급 : ${grade}\n납품수량 : ${count}\n기타사항 : ${etc}\n입력하신 내용이 맞습니까?`);
+        
+        
+        }
+    </script>
+
+</body>
+</html>

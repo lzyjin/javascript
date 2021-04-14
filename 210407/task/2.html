@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열문제</title>
+</head>
+<body>
+    <h1>배열 실습 문제1</h1>
+
+    <fieldset>
+        <legend>보기</legend>
+        <label id="la1">사과,바나나,당근</label><br> 
+        <label id="la2">김밥,치즈,떡볶이,햄버거</label><br> 
+        <label id="la3">환타,사이다,콜라</label><br> 
+        <label id="la4">고양이,강아지</label><br>
+    </fieldset>
+
+    <br>
+
+    <input id="search" type="text">
+    <button onclick="output();">전송 및 처리</button>
+
+    <script>
+
+        let arr1 = [];
+        let arr2 = [];
+        let arr3 = [];
+        let arr4 = [];
+
+
+        const output = () => {
+
+            let input = document.getElementById(`la1`).innerHTML;
+
+            arr1 = input.split(",");
+
+            input = document.getElementById(`la2`).innerHTML;
+
+
+            
+            arr2 = input.split(",");
+
+            input = document.getElementById(`la3`).innerHTML;
+
+
+
+            arr3 = input.split(",");
+
+            input = document.getElementById(`la4`).innerHTML;
+
+
+
+            arr4 = input.split(",");
+
+            arr1 = arr1.concat(arr2).concat(arr3).concat(arr4);
+
+
+            
+            // console.log(arr1);
+
+            let search = document.getElementById("search").value;
+
+            let result = arr1.indexOf(search);
+
+            alert(`${search}는 배열 index${result}에 존재합니다`);
+
+
+
+        }
+    </script>
+
+</body>
+</html>

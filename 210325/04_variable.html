@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 활용하기</title>
+</head>
+
+<body>
+
+    <h1>변수 선언하기</h1>
+
+    <p>
+        변수를 선언하는 방법<br>
+        var 변수명;<br>
+
+        자바스크립트에서 변수를 선언할 때는 자료형을 지정하지 않는다.<br>
+        자바스크립트는 모든 자료형이 ( 주소를 저장하는 ) 참조형이다. <br>
+        자바스크립트 변수의 타입은 값을 대입했을 때 그 값의 타입으로 결정된다. 
+    </p>
+
+    <p>
+        변수는 접근할 수 있는 범위에 따라 영역(scope)을 구분한다. <br>
+
+        golbal scope : page 내 어디서든 접근 가능한 변수 (window객체의 멤버변수)<br>
+        local scope : function 내부에서 선언한 변수 ( funcrion 내부에서만 사용 가능 ) <br>
+    </p>
+
+    <p>
+        자바스크립트는 블록범위( {} 중괄호 블록 )를 허용하지 않는다. = {}안의 변수에 {}블록 바깥에서 접근 가능 <br>
+
+        자바에서는 if문이나 for문안에서 선언된 변수를 if문이나 for문 바깥에서 접근 할 수 없다.<br>
+
+        자바스크립트에서는 if(){ var test } 이렇게 {}안에 선언된 변수를 if문 바깥에서 접근 할 수 있다 <br>
+        지역변수를 결정하는 기준이 function이기 때문 <br>
+    </p>
+
+    <p>
+        변수 선언시 주의할 점<br>
+        변수를 중복으로 선언해도 에러가 나지 않는다 <br>
+        변수 중복에 대해 잘 체킹을 해야했다 -> es6로 와서 보완되었다.
+    </p>
+
+
+
+
+    <script>
+
+        // 기본적인 변수 선언 ( 전역 변수 )
+        // var test;
+        var test = "첫번째 선언";
+        console.log(test);
+
+        // 지역 변수 선언 ( 로컬 변수 )
+        function localScopeTest() {
+
+            var funcVar; // localScopeTest()를 호출해야만 생성되는 변수. -> 호출해야 지역변수를 사용 가능
+
+            // function 내부에서 전역변수 접근(사용) 가능 
+            console.log(test);
+            console.log(funcVar);
+
+        }
+
+         // 함수 호출 
+         localScopeTest();
+
+        // 지역변수를 function 외부에서 접근해서 error
+        // 04_variable.html:39 Uncaught ReferenceError: funcVar is not defined at 04_variable.html:39
+        // console.log(funcVar);
+        // localScopeTest()를 호출해야만 지역변수 funcVar에 접근가능
+
+    </script>
+
+
+
+    <script>
+
+        // test는 전역변수라서 다른 script에서 접근(사용) 가능 
+        console.log(test);
+
+
+
+        // 자바스크립트는 블록범위를 허용하지 않는다
+
+        var age = 19;
+
+        if(age > 10) {
+
+            var name = "유병승";
+        }
+
+        // 에러 안난다 -> if문안에서 선언한 name 변수에 접근 가능 -> name은 전역변수이다. 
+        console.log(name);
+
+
+
+        for(var i=0; i < 10; i++) {
+
+            // 0부터 9까지 출력 
+            console.log(i); 
+        }
+
+
+        // i가 10으로 출력 
+        // for문 안에서 선언한 i를 for문 바깥에서 사용 가능 
+        // for문의 {}블록이 의미가 없음 
+        // 어차피 {}바깥에서 접근 가능
+        // var예약어로 선언해도 전역변수처럼 사용 
+        console.log("외부에서 호출 " + i);
+
+        // 내가 만든 전역변수들도 볼 수 있다 ( i, name, age )
+        // 지역변수는 없다 ( funcvar )
+        console.log(window);
+
+
+
+
+
+
+        // 변수 중복 테스트 
+
+        var test = "두번째 선언";
+        // 변수명이 중복되면 나중에 할당된 값으로 덮어쓰기 된다 
+        // 에러가 나지 않으므로 스스로 잘 체크해야하는 부분
+        // 분기처리 했어야 했다.
+        console.log(test);
+
+
+        // 선언하지 않은 변수를 사용했는데 에러가 나지 않음 
+        // 없으니까 window에서 만들어버림 
+        address = "경기도 시흥시";
+
+
+        function notVar() {
+            
+            // function 안에서 선언해도 
+            // var 예약어를 사용하지 않고 선언하면 global scope가 된다 
+            email = "prince0324@naver.com"; 
+        }
+
+        notVar(); // notVar()를 실행시켰을 때( 읽었을 때 ) email을 global scope(전역변수)로 올라간다. 그래야 콘솔에 출력할 수 있다.
+                  // 그래서 이 코드를 주석처리 하면 email이란 변수는 존재하지 않기때문에 에러가 난다.
+        console.log(email); // 에러 안남 
+        console.log(window.email);
+
+        // 이런 특징이 있기 때문에
+        // 변수를 선언할 때는 무조건 var를 사용하자 
+
+    </script>
+
+
+
+
+    <p>
+        ES6에 와서 변수를 선언하는 예약어를 추가했다.  <br>
+        block scope를 유지하고, 중복선언하는것을 방지하는 기능을 한다.<br>
+        let, const예약어를 사용해서 변수를 선언한다.<br>
+        let : 블록영역 스코프을 가지는 변수를 선언할 때 ( 블록 안에서만 쓸 수 있는 변수 ) <br>
+        const : 상수를 저장하는 변수를 선언할 때 <br>
+    </p>
+
+
+    <script>
+        let name = "유병승";
+        // let name = "김지한"; // 변수가 중복되어서 에러 
+
+        // 에러가 나면 해당 script의 코드를 읽지 않는다 
+
+        let name1 = "김지한"; 
+
+
+
+
+        if(name == "유병승") {
+
+            let phone = 10; // phone 변수는 블록스코프 영역이라서 if문 밖에서 접근 불가능 
+
+            console.log(phone); // 정상 출력
+        }
+
+        // console.log(phone); // 에러 
+
+
+
+
+        name1 = "호호호";
+
+        // 같은 script에서 위에서 에러났기 때문에 이 코드를 실행시키지 않음 
+        // 에러나는 코드를 주석처리 하면 name1이 정상 출력 된다 
+        console.log(name1); 
+
+
+        for(let j=0; j < 10; j++) {
+
+            console.log(j);
+        }
+
+        // console.log(j); // {}밖에서 j에 접근 불가능 -> 에러 
+
+
+        const nickname = "유뱅"; // 상수 
+    
+        console.log(nickname);
+
+        // nickname = "유병승병승"; // 상수의 값을 변경하려고 하면 에러 
+
+    </script>
+
+
+
+    <h2>자바스크립트 자료형</h2>
+    
+    <!-- 어차피 주소값으로 참조하니까 자료형을 나눌 필요가 없을 뿐. 자료형이 있긴 있다 -->
+
+    <p>
+        자바스크립트는 자료형을 가지고 있으며, <br>
+        변수의 자료형이 결정되는 것은 변수에 값(리터럴)을 대입할 때이다.<br>
+        각 자료형을 알아보고, 리터럴 표현 방법을 알아보자.<br>
+        자료형 : 문자열( string ), 숫자( number ), 배열( [] ), 객체( {} ), 함수( function() ), undifined, boolean<br>
+    </p>
+
+    <button onclick="testType();">변수타입알아보기</button>
+
+    <div id="container"></div>
+
+    <script>
+        function testType() {
+            
+            // 자료형 리터럴 사용법
+
+            // string : "값" 또는 '값' 으로 작성해야 문자로 표현된다 
+
+            let name = "유병승";
+            name = '유병승';
+
+
+
+            // number : 30 또는 3.14 
+
+            let age = 19;
+            let height = 180.5;
+
+
+
+            // boolean : true 또는 false
+
+            let flag = true;
+            flag = false;
+
+
+            
+            // 배열 : new Array(1, 2, 3, 4) 또는 [1, 2, 3, 4]
+
+            let arr = [1, 2, 3, 4];
+            arr = new Array(1, 2, 3, 4);
+
+
+
+            // 객체 : {key : value, key : value, ...} 또는 new 생성자함수(값, 값)
+
+            let obj = {name : "유병승", age : 19};
+
+
+
+            // 함수 : 익명함수 function(){ console.log('유병승'); }
+
+            let func = function(){ console.log("유병승") };
+
+            
+
+
+
+            // 자바스크립트에서 변수는 유연하다. 
+            // 장점이면서 큰 단점이다...
+            // 단점 : 프로그램의 안정성이 떨어진다
+
+            console.log(name); // 유병승 
+
+            name = age; // 가능 
+                console.log(name); // 19
+
+            name = flag; // 가능
+                console.log(name); // false
+
+            name = arr;// 가능
+                console.log(name); // [1, 2, 3, 4]
+
+
+        }
+    </script>
+
+
+
+
+    <h3>변수의 타입 확인하기</h3>
+
+    <p>
+        typeof() 함수 이용 <br>
+        typeof(변수명) 또는 typeof 변수명 
+    </p>
+
+    <button onclick="typeTest();">typeof 이용하기</button>
+
+    <script>
+        function typeTest() {
+
+            let temp = "유병승";
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : 유병승 / 자료형 : string
+
+
+            temp = 180.5;
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : 180.5 / 자료형 : number
+
+
+            temp = true;
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : true / 자료형 : boolean
+
+
+            temp = ["유병승", 19, 180.5];
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : 유병승,19,180.5 / 자료형 : object
+
+
+            temp = {name : "유병승", age : 19, height : 180.5 };
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : [object Object] / 자료형 : object
+
+
+            temp = function(){ console.log("19") };
+                console.log("temp : " + temp + " / 자료형 : " + typeof(temp));
+            // temp : function(){ console.log("19") } / 자료형 : function
+
+
+            console.log("자료형 : " + typeof(bs));
+            // 자료형 : undefined
+            // bs라는 변수는 선언하지 않았기 때문에 
+
+    }
+    </script>
+    
+
+</body>
+
+</html>

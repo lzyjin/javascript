@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM 객체</title>
+</head>
+
+<body>
+    <h2>screen 객체 </h2>
+
+    <p>
+        window객체의 property객체로 client화면에 대한 정보를 가지고 있는 객체
+    </p>
+
+    <button onclick="infoScreen();">스크린객체정보</button>
+    <div id="screenInfo"></div>
+    
+    <script>
+        const infoScreen = () => {
+
+            let info = document.getElementById("screenInfo");
+
+            // 둘다 가능
+            console.log(window.screen);
+            console.log(screen);
+
+            // key가 string으로 저장되므로 
+            for(let key in screen) { // 변수 key의 이름은 바뀌어도 된다 
+
+                info.innerHTML += `${key} -> ${screen[key]}<br>`;
+
+                // 아래 두 방법은 안됨 
+                // info.innerHTML += `${key} -> ${screen.key}<br>`;
+                // info.innerHTML += `${key} -> ${screen['key']}<br>`;
+            }
+        }
+
+        /*
+        availWidth -> 1280
+        availHeight -> 775
+        width -> 1280
+        height -> 800
+        colorDepth -> 24
+        pixelDepth -> 24
+        availLeft -> 0
+        availTop -> 25
+        orientation -> [object ScreenOrientation]
+        */
+    </script>
+
+
+
+    <h2>navigator 객체</h2>
+
+    <p>
+        window객체의 property객체로 client브라우저 정보를 가지고 있다
+    </p>
+
+    <button onclick="infoNavi();">navigator정보</button>
+
+    <div id="naviInfo"></div>
+
+    <script>
+        const infoNavi = () => {
+
+            let area = document.getElementById("naviInfo");
+            console.log(navigator);
+
+            for(let key in navigator) {
+                area.innerHTML += `${key} -> ${navigator[key]}<br>`;
+            }
+
+            navigator.geolocation.getCurrentPosition((position)=>{
+                console.log(position);
+                area.innerHTML += `위도 : ${position.coords.latitude} 경도 : ${position.coords.longitude}`;
+            })
+        }
+    </script>
+
+
+
+
+    <h3>location 객체</h3>
+
+    <p> 
+        window객체의 property객체로 브라우저의 url정보를 가지고 있는 객체
+        url정보를 변경하여 페이지를 이동할 수 있다
+        주로 페이지를 변경할 때 많이 사용한다.
+        함수를 이용하거나 속성값을 변경
+        함수 : assign() / replace() / reload()
+        속성 : location.href = "주소값" -> url에 작성한다는것을 서버에 요청을 보내는 것. 응답을 받는것이 html문서를 받는것
+    </p>
+
+    <button onclick="locationInfo();">location 정보 확인</button>
+
+    <div id="locationInfo"></div>
+
+    <script>
+        const locationInfo = () => { // const로 쓰는 이유는 같은이름의 함수를 중복해서 만드는것 방지 , 함수 변경 금지. 상수니까 
+            
+            let area = document.getElementById("locationInfo");
+            console.log(location);
+                
+                for(let key in location) {
+                    area.innerHTML += `${key} -> ${location[key]}<br>`;
+                }
+        }
+    </script>
+
+
+
+    <h3>페이지 이동시키기</h3>
+
+
+
+    <h4>속성을 변경해서 페이지 이동하기</h4>
+
+    <!-- onclick="자바스크립트 구문" 클릭하면 구문이 실행된다. 보통 클릭하면 기능을 실행시키니까 함수를 많이 넣는것 -->
+
+    <button onclick="location.href = 'http://www.youtube.com'">유튜브로 이동</button>
+
+    <!-- 현재 위치 경로 확인하려면 href로 확인하면 된다 -->
+
+
+     
+
+    <h4>함수를 이용해서 페이지 이동하기</h4>
+
+    <!-- assign()은 뒤로가기 가능 -->
+    <button onclick="location.assign('http://www.watcha.com');">왓챠로 이동</button>
+
+    <!-- replace()는 새 페이지로 교체하는거라서 뒤로가기 불가능 -->
+    <button onclick="location.replace('http://www.netflix.com');">넷플릭스로 이동</button>
+    
+    <!-- 새로고침 버튼 ( 서버에 재요청 )-->
+    <button onclick="location.reload()">F5</button>  
+
+
+
+
+    <h3>history 객체</h3>
+
+    <button onclick="history.forward();">앞으로 가기</button>
+    <button onclick="history.back();">뒤로 가기</button>
+    <script>
+        console.log(history);
+    </script>
+    
+
+    <!-- 사용자가 입력한 페이지로 이동하기 기능 만들어보기 -->
+
+    <input type="text" id="url" placeholder="이동할 페이지 주소를 입력하세요">
+    <button onclick="goPage();">이동</button>
+    <script>
+        const goPage = () => {
+            let url = document.getElementById("url").value;
+            // location.assign(url);
+            open(url, "_blank", "width=400, height=400");
+        }
+    </script>
+
+</body>
+</html>

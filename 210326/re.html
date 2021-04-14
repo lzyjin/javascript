@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0326복습파일</title>
+</head>
+<body>
+    <ul>
+        <li>가</li>
+        <li>나다</li>
+        <li>라마바</li>
+        <li>1</li>
+        <li>23</li>
+        <li>456</li>
+        <li>a</li>
+        <li>bc</li>
+        <li>def</li>
+        <li>1000</li>
+    </ul>
+
+    <div id="area"></div>
+    <button onclick="lichange();">리스트 변경</button>
+
+    <script>
+        // li태그에 있는 글자가 -> 속성에 있는 값을 가져올 때 속성을 호출하면 가져올 수 있다. 
+        // 1개면 글자색을 pink
+        // 2개면 crimson(
+        // 3개면 magenta
+        // 그 외면 배경색을 royal blue
+
+        function lichange() {
+            let input = document.getElementsByTagName("li");
+            
+            // input에는 여러개의 태그
+
+            console.log(input.length); // 10개 
+
+            for(let i=0; i < input.length; i++) {
+
+                let value = input[i].innerHTML;
+
+                console.log(value);
+
+                /* switch(value.length) {
+                    case 1:
+                        input[i].style.color="pink";
+                    break;
+                    case 2:
+                        input[i].style.color="crimson";
+                    break;
+                    case 3:
+                        input[i].style.color="magenta";
+                    break;
+                    default:
+                        input[i].style.color="blue";
+                    break;
+                }
+                */
+
+                // switch문의 case문에 조건문을 넣을 수 있다 
+                switch(true) {
+
+                    case value.length == 1: 
+                        input[i].style.color="pink"; 
+                    break;
+
+                    case value.length == 2: 
+                        input[i].style.color="crimson"; 
+                    break;
+
+                    case value.length == 3: 
+                        input[i].style.color="magenta"; 
+                    break;
+
+                    default: 
+                        input[i].style.color="royalblue"; 
+                    break;
+                    }
+
+            }
+
+
+        }
+    </script>
+
+
+
+    <button onclick="joinTest();">join버튼</button>
+    <div id="area2"></div>
+
+    <script>
+
+        function joinTest() {
+
+            let hobby = ["코딩", "영화감상", "산책", "게임"];
+
+            let area = document.getElementById("area2");
+
+            // let strArr = hobby.join("-");
+            // area2.innerHTML = `- 구분자 지정  : ${strArr}`;
+            // - 구분자 지정 : 코딩-영화감상-산책-게임
+
+            strArr = hobby.join();
+            area2.innerHTML = `구분자 없이 : ${strArr}`;
+            // 구분자 없이 : 코딩,영화감상,산책,게임
+           
+
+        } // 반환형으로 처리 
+    </script>
+
+    <p>push() pop() 연습</p>
+    <script>
+        let numbers = [1, 2, 3];
+        console.log("원본 배열 : " + numbers + " 배열 길이 :  " + numbers.length);   // 원본 배열 : 1,2,3 배열 길이 :  3
+
+        numbers.push(4, 5);
+        console.log("push한 배열 : " + numbers + " 배열 길이 :  " + numbers.length);   // push한 배열 : 1,2,3,4,5 배열 길이 :  5
+
+        numbers.pop(5);
+        console.log("pop한 배열 : " + numbers + " 배열 길이 :  " + numbers.length);   // pop한 배열 : 1,2,3,4 배열 길이 :  4
+    </script>
+
+    <p>splice 연습</p>
+    <script>
+        
+        var nums = [1, 2, 3, 4, 5];
+        console.log(nums);         // (5) [1, 2, 3, 4, 5]
+
+        nums1 = nums.splice(0, 1, 100);
+        console.log(`새롭게 받은 값 ${nums1}`);     // 새롭게 받은 값 1       반환하는건 slice랑 똑같다 
+        console.log(`원본 값 ${nums}`);           // 원본 값 100,2,3,4,5
+        
+    </script>
+
+</body>
+</html>

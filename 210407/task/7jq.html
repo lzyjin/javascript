@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7번 문제 제이쿼리로 풀기</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        fieldset{
+
+            background-color: lightgray;
+            width: 300px;
+            
+            /* 기억하자 */
+            text-align: center;
+        }
+        div#searchTitle, div#searchDate, div#searchWriter{
+            background-color: rgb(255, 208, 0);
+            padding: 30px;
+            width: 400px;
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>실습문제 3</h1>
+    
+    <div>
+        <fieldset>
+            <legend>검색할 항목을 선택하세요</legend>
+            <input onclick="selectCategory(this);" type="radio" name="category" id="title">제목
+            <input onclick="selectCategory(this);" type="radio" name="category" id="date">날짜
+            <input onclick="selectCategory(this);" type="radio" name="category" id="writer">작성자
+        </fieldset>
+
+    </div>
+
+    <hr>
+
+    <div id="searchTitle">
+        검색할 제목을 입력하세요 : <br>
+        <input type="text">
+        <button>검색</button>
+    </div>
+
+    <div id="searchDate">
+        검색할 날짜를 선택하세요 : <br>
+        <input type="date" name="" id="">
+        <input type="date" name="" id="">
+        <button>검색</button>
+    </div>
+
+    <div id="searchWriter">
+        검색할 작성자 아이디를 입력하세요 : <br>
+        <input type="text">
+        <button>검색</button>
+    </div>
+
+    <script>
+        // const select = () => {
+        // 라고 했는데 안됐다
+        // 함수명(변수명)이 태그명이랑 겹쳐서 그런듯 ... 주의하자 
+
+        
+        // const selectCategory = () => {
+        const selectCategory = (e) => { // 이렇게 하면 해당 함수가 실행되는 태그가 선택됨 
+
+            // let category = $("input[type=radio]").attr("id"); // 이렇게 하면 다른 버튼을 선택해도 id가 title이 뜸 
+            
+            // 수정한 코드
+            let category = $(e).attr("id");
+
+
+            // console.log(category);
+            
+
+            let titleblock = $("div#searchTitle");
+            let dateblock = $("div#searchDate");
+            let writerblock = $("div#searchWriter");
+
+            switch(category) {
+
+                case "title":
+                    // titleblock.css("visibility", "visible");
+                    // dateblock.css("visibility", "hidden");
+                    // writerblock.css("visibility", "hidden");
+                    titleblock.css("display", "block");
+                    dateblock.css("display", "none");
+                    writerblock.css("display", "none");
+                break;
+
+                case "date":
+                    
+                    titleblock.css("display", "none");
+                    dateblock.css("display", "block");
+                    writerblock.css("display", "none");
+                break;
+
+                case "writer":
+                    
+                    titleblock.css("display", "none");
+                    dateblock.css("display", "none");
+                    writerblock.css("display", "block");
+                break;
+            }
+        }
+    </script>
+
+</body>
+</html>

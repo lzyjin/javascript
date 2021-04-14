@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9번문제</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        table{
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+        tr, td{
+            border: 1px black solid;
+        }
+        td{
+            padding: 10px;
+        }
+        div#buttons{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>rainbowColor</h1>
+    <table>
+        <tr>
+            <td>전체선택:</td>
+            <td>
+                <div id="all">
+                    <input type="radio" name="color" id="red">빨
+                    <input type="radio" name="color" id="orange">주
+                    <input type="radio" name="color" id="yellow">노
+                    <input type="radio" name="color" id="green">초
+                    <input type="radio" name="color" id="blue">파
+                    <input type="radio" name="color" id="navy">남
+                    <input type="radio" name="color" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>하나</td>
+            <td>
+                <div>
+                    <input type="radio" name="color1" id="red">빨
+                    <input type="radio" name="color1" id="orange">주
+                    <input type="radio" name="color1" id="yellow">노
+                    <input type="radio" name="color1" id="green">초
+                    <input type="radio" name="color1" id="blue">파
+                    <input type="radio" name="color1" id="navy">남
+                    <input type="radio" name="color1" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>둘</td>
+            <td>
+                <div>
+                    <input type="radio" name="color2" id="red">빨
+                    <input type="radio" name="color2" id="orange">주
+                    <input type="radio" name="color2" id="yellow">노
+                    <input type="radio" name="color2" id="green">초
+                    <input type="radio" name="color2" id="blue">파
+                    <input type="radio" name="color2" id="navy">남
+                    <input type="radio" name="color2" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>셋</td>
+            <td>
+                <div>
+                    <input type="radio" name="color3" id="red">빨
+                    <input type="radio" name="color3" id="orange">주
+                    <input type="radio" name="color3" id="yellow">노
+                    <input type="radio" name="color3" id="green">초
+                    <input type="radio" name="color3" id="blue">파
+                    <input type="radio" name="color3" id="navy">남
+                    <input type="radio" name="color3" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>넷</td>
+            <td>
+                <div>
+                    <input type="radio" name="color4" id="red">빨
+                    <input type="radio" name="color4" id="orange">주
+                    <input type="radio" name="color4" id="yellow">노
+                    <input type="radio" name="color4" id="green">초
+                    <input type="radio" name="color4" id="blue">파
+                    <input type="radio" name="color4" id="navy">남
+                    <input type="radio" name="color4" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>다섯</td>
+            <td>
+                <div>
+                    <input type="radio" name="color5" id="red">빨
+                    <input type="radio" name="color5" id="orange">주
+                    <input type="radio" name="color5" id="yellow">노
+                    <input type="radio" name="color5" id="green">초
+                    <input type="radio" name="color5" id="blue">파
+                    <input type="radio" name="color5" id="navy">남
+                    <input type="radio" name="color5" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>여섯</td>
+            <td>
+                <div>
+                    <input type="radio" name="color6" id="red">빨
+                    <input type="radio" name="color6" id="orange">주
+                    <input type="radio" name="color6" id="yellow">노
+                    <input type="radio" name="color6" id="green">초
+                    <input type="radio" name="color6" id="blue">파
+                    <input type="radio" name="color6" id="navy">남
+                    <input type="radio" name="color6" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>일곱</td>
+            <td>
+                <div>
+                    <input type="radio" name="color7" id="red">빨
+                    <input type="radio" name="color7" id="orange">주
+                    <input type="radio" name="color7" id="yellow">노
+                    <input type="radio" name="color7" id="green">초
+                    <input type="radio" name="color7" id="blue">파
+                    <input type="radio" name="color7" id="navy">남
+                    <input type="radio" name="color7" id="purple">보
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="buttontd" colspan="2">
+                <div id="buttons">
+                    <button id="submit">submit</button>
+                    <button id="reset">reset</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+
+        $("input[type=radio]").click( (e) => {
+
+            let color =  $(e.target).attr("id");
+
+            let td = $(e.target).parent().parent();            
+        
+            switch(color) {
+
+                case "red":
+                    td.css("backgroundColor", "red");
+                break;
+
+                case "orange":
+                    td.css("backgroundColor", "orange");
+                break;
+                
+                case "yellow":
+                    td.css("backgroundColor", "yellow");
+                break;
+
+                case "green":
+                    td.css("backgroundColor", "green");
+                break;
+
+                case "blue":
+                    td.css("backgroundColor", "blue");
+                break;
+
+                case "navy":
+                    td.css("backgroundColor", "navy");
+                break;
+
+                case "purple":
+                    td.css("backgroundColor", "purple");
+                break;
+            }
+        } );
+
+        $("div#all>input[type=radio]").click( (e) => {
+
+            let color = $(e.target).attr("id");
+
+            // let allTd = $("div").parent().not("div#buttons");
+            let allTd = $("div").parent().not("#buttontd");
+
+            switch(color) {
+
+                case "red":
+                    allTd.css("backgroundColor", "red");
+                break;
+
+                case "orange":
+                    allTd.css("backgroundColor", "orange");
+                break;
+
+                case "yellow":
+                    allTd.css("backgroundColor", "yellow");
+                break;
+
+                case "green":
+                    allTd.css("backgroundColor", "green");
+                break;
+
+                case "blue":
+                    allTd.css("backgroundColor", "blue");
+                break;
+
+                case "navy":
+                    allTd.css("backgroundColor", "navy");
+                break;
+
+                case "purple":
+                    allTd.css("backgroundColor", "purple");
+                break;
+            }   
+
+        } );
+
+        $("button#reset").click( (e) => {
+
+            let allTd = $("div").parent().not("#buttontd");
+
+            // allTd.css("backgroundColor", "white");
+            // allTd.removeAttr()
+            allTd.css("backgroundColor", "");
+
+
+            
+            // $("input[type=radio]").removeAttr("checked");
+            // 안된다 
+
+            $("input[type=radio]").prop("checked", false);
+        } );
+           
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 8</title>
+</head>
+<body>
+    <h1>배열 실습 문제 3</h1>
+    <p>
+        문자열을 여러 개 입력받은 후 출력 버튼 클릭시 입력했던 모든 문자열이 출력되도록 만드세요.
+        예) 개구리 -> 입력, 바나나 -> 입력, 복숭아 -> 입력
+        출력 : 개구리, 바나나, 복숭아
+    </p>
+
+    <fieldset>
+        <legend>입력</legend>
+        <input id="input" type="text">
+        <button onclick="input();">입력</button>
+    </fieldset>
+
+    <div id="container"></div>
+
+    <button onclick="output();">출력</button>
+
+    <style>
+        div{
+            border: 1px red solid;
+        }
+    </style>
+
+     <script>
+         var arr = [];
+         
+         const input = () => {
+
+            var input = document.getElementById("input").value;
+            
+            arr.push(input);
+
+         }
+
+         const output = () => {
+
+            document.getElementById("container").innerHTML = arr;
+         }
+     </script>
+</body>
+</html>

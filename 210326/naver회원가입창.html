@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>naver회원가입창</title>
+
+    <style>
+        .birthdate{
+
+        }
+    </style>
+</head>
+
+<body>
+    <div><a href="www.naver.com"><h1>NAVER</h1></a></div>
+
+        <div class="idblock">
+            <p>아이디</p>
+            <input type="text" name="id" id="id">
+        </div>
+
+        <div class="pwblock">
+            <p>비밀번호</p>
+            <input type="password" name="pw" id="pw">
+        </div>
+
+        <div class="pwcheckblock">
+            <p>비밀번호 재확인</p>
+            <input type="password" name="pw" id="repw">
+        </div>
+
+        <div class="nameblock">
+            <p>이름</p>
+            <input type="text" name="name" id="name">
+        </div>
+
+        <div class="birthdateblock">
+            <p>생년월일</p>
+            <input type="text" id="year" placeholder="년(4자)" maxlength="4">
+            <select name="month" id="month">
+                <option value="">월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <input type="text" placeholder="일">
+
+        </div>
+
+        <div class="genderblock">
+            <p>성별</p>
+            <select name="gender" id="gender">
+                <option value="성별">성별</option>
+                <option value="남자">남자</option>
+                <option value="여자">여자</option>
+                <option value="선택안함">선택안함</option>
+            </select>
+        </div>
+
+        <div class="email">
+            <p>본인확인 이메일(선택)</p>
+            <input type="email" name="email" id="email" placeholder="선택입력">
+        </div>
+
+        <div class="phoneblock">
+            <p>휴대전화</p>
+            <select name="nation" id="nation">
+                <option value="">대한민국 +82</option>
+                <option value="">덴마크 +45</option>
+            </select><br>
+            <input type="text" name="phone" id="phone" placeholder="전화번호 입력">
+            <input type="submit" value="인증번호받기"><br>
+            <input type="text" placeholder="인증번호 입력하세요">
+
+        </div>
+
+        <br>
+
+        <div>
+            <input type="submit" value="가입하기">
+        </div>
+
+
+
+</body>
+</html>

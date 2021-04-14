@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0325복습파일 </title>
+</head>
+<body>
+    
+    <script>
+        var test;
+        console.log(test);
+
+        function localScopeTest() {
+            var funcVari;
+
+            console.log(test);
+            console.log(funcVari);
+        }
+        
+        localScopeTest();
+        console.log(funcVari);
+    </script>
+
+    <script>
+        var age = 19;
+        if(age > 10) {
+            var name = "유병승";
+        }
+        console.log(name);
+
+
+        for(var i=0; i < 10; i++) {
+            console.log(i);
+        }
+
+        console.log("외부에서 호출" + i);
+
+
+    </script>
+
+    <input type="text" id="userId" name="userId" onkeyup="checkId();">
+    <div id="result"></div>
+
+    <script>
+        function checkId() {
+            let input = document.getElementById("userId");
+            let value = input.value;
+            if(value.length < 4) {
+                document.getElementById("result").innerHTML="4글자 이상 입력해라";
+            } else {
+                document.getElementById("result").innerHTML="";
+            }
+        }
+    </script>
+
+    <input type="text" id="gender" placeholder="M 또는 F 를 입력 ">
+    <button onclick="checkGender();">성별확인</button>
+    <div id="result2"></div>
+
+    <script>
+        function checkGender() {
+            let input = document.getElementById("gender");
+            let value = input.value;
+
+            value = value.toUpperCase();
+
+            document.getElementById("result2").innerHTML=value;
+
+        }
+     </script>
+
+     <button onclick="numberTest();">Number 객체 함수</button>
+
+     <script>
+         function numberTest() {
+             console.log(Number.MAX_VALUE);
+             console.log(Number.MIN_VALUE);
+
+             console.log(Number.isInteger(5));
+             console.log(Number.isInteger(5.5));
+         }
+     </script>
+
+     <Button onclick="mathTest();">Math 객체 함수</Button>
+
+     <script>
+         function mathTest() {
+             console.log(Math.random());
+             console.log(Math.floor(Math.random()*10));
+
+             console.log(Math.abs(-30));
+
+             console.log(Math.floor(4.444));
+
+             console.log(Math.round(4.78));
+
+             console.log(Math.ceil(4.44));
+
+             console.log(Math.ceil("십"));
+
+             console.log(isNaN(Math.ceil("십")));
+         }
+     </script>
+
+     <script>
+         let num = 20;
+         let name = "yj";
+         let strNum = "20";
+         let strNum2 = "20살";
+
+         //console.log(num + name, typeof(num + name));
+         //console.log(num.toString(), typeof(num.toString()));
+
+        console.log(strNum, typeof(strNum) );
+        console.log(Number(strNum),typeof(Number(strNum)));
+        console.log(num+strNum);
+        console.log(num+strNum2);
+        console.log(num+Number(strNum2)); NaN
+        console.log(num+parseInt(strNum2)); // 40
+
+     </script>
+
+     <input type="number" id="n1">
+     <input type="number" id="n2">
+     <button onclick="sum();">더하기</button>
+     <div id="result3"></div>
+
+     <script>
+         function sum() {
+             let n1 = document.getElementById("n1");
+             let v1 = Number(n1.value);
+             let n2 = document.getElementById("n2");
+             let v2 = Number(n2.value);
+
+             result3.innerHTML=v1 + v2;
+             
+         }
+      </script>
+
+      <input type="text" id="str">
+      <button onclick="addStr();">문자열더하기</button>
+      <div id="result4"></div>
+
+      <script>
+          function addStr() {
+
+            let inputStr = document.getElementById("str").value;
+            document.getElementById("result4").innerHTML += inputStr;
+            inputStr = "";
+           
+          }
+      </script>
+</body>
+</html>

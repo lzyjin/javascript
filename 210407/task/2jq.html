@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제2 제이쿼리로 풀기</title>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        label{
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>배열 실습 문제 1</h1>
+
+    <fieldset>
+        <legend>보기</legend>
+        <label id="la1">사과,바나나,당근</label>
+        <label id="la2">김밥,치즈,떡볶이,햄버거</label>
+        <label id="la3">환타,사이다,콜라</label>
+        <label id="la4">고양이,강아지</label>
+    </fieldset>
+
+    <input type="text" id="search">
+    <button onclick="check();">전송 및 처리</button>
+
+    <script>
+        
+        const check = () => {
+
+            let arr = [];
+
+            // console.log($("fieldset>legend").siblings().length);
+
+            for(let i=1; i <= $("legend").nextAll().length; i++) {
+
+
+                newArr = $(`label#la${i}`).html().split(",");
+
+                // console.log(newArr);
+
+                // concat은 새로운 배열을 만듬 
+                // concat함수는 매개변수 배열과 기준 배열을 합쳐서 새로운 배열을 반환하는 기능 
+                // 여기서 막혔다가 해결함
+                arr = arr.concat(newArr);
+
+                // console.log($(`label#la${i}`).html().split(","));
+
+                
+            }
+
+            let search = $("input#search").val();
+
+                if( arr.indexOf(search) != -1 ) {
+
+                    alert(`${search}는 배열 index${arr.indexOf(search)}에 있습니다.`);
+               
+                } else {
+
+                    alert(`${search}는 존재하지 않습니다.`)
+                }
+
+        }
+
+    </script>
+
+
+</body>
+</html>

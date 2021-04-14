@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글창 다시 만들기 연습</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        div{
+            border: 1px red solid;
+        }
+        li{
+            list-style: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>4월 10일</h1>
+
+    <p>태그를 그림으로 그려보기</p>
+    
+    <input type="text" id="comment">
+    <button id="add1" onclick="processin()">입력</button>
+    <div id="outter">
+        <!-- 댓글1 버튼
+            답글1-1 
+            답글1-2
+            ... 
+            입력창 답글입력
+        댓글2 버튼 -->
+    </div>
+
+    <script>
+
+
+        // $("button#add1").click( (e) => {
+        const processin = () =>{
+
+            let input = $("input#comment").val();
+
+            // 1. 바깥 div
+            let divOutter = $("div#outter");
+
+            // 2. div안에 h1+ button
+
+                // 2-1. h1을 감쌀 div 
+                let divInner = $("<div>");
+                
+                // 2-2. h1과 button
+                let h1WithBtn = $(`<h1>${input}<button onclick="addRepl(this);"> 대댓글 </button></h1>`);
+                
+                // 댓글인 h1과 같은레벨에 대댓글 추가
+                // 대댓글이 여러개 = ul블록
+                // 대댓글은 ul안의 li로 
+
+                // 2-3 
+                // ul태그 만들기
+                let createUl = $(`<ul>`);
+                    
+                // divInner안에 h1, ul, 지워질 addDiv
+                
+
+            
+            // 3. 2-1번 + 2-2번 
+            // 안쪽 div 안에 h1과 버튼 넣기
+            divInner.append(h1WithBtn);
+
+                    // 3-1 
+                    // 안쪽 div안에 ul 넣기 
+                    divInner.append(createUl);
+            
+            // 4. 1번 + 3번
+            // 바깥 div안에 안쪽 div넣기
+            divOutter.append(divInner);
+
+
+
+            // $("div#outter").html($("div#outter").html() + `<h1>${input}<button id='add2'>답글 입력</button></h1>`);
+        }
+
+
+        const addRepl = (l) => {
+
+                        console.log("test");
+
+                        // e.target은 대댓글button
+                        // button의 parent는 h1 
+                        // h1의 parent는 divInner
+                        
+                        // 대댓글을 작성할 input태그와 button태그 생성
+                        // divInner의 자식이자 h1WithBtn의 형제로 추가 
+                        console.log("t1");
+                        let addInput = $("<input>");
+                        let addBtn = $("<button onclick ='submitreple(this)'>댓글달기</button>");
+                        let addDiv = $("<div id='addDiv'></div>");
+                        addDiv.append(addInput);
+                        addDiv.append(addBtn);
+                        $(l).parent().parent().append(addDiv);
+
+        }
+
+        const submitreple = (a) => {
+
+            // a 가 button
+            // input의 value 가져오기
+            let replTxt = $(a).prev().val();
+
+            // ul 선택 
+            // console.log($(a).parent().prev()); // ul 
+
+            let getUl = $(a).parent().prev();
+
+            // li 만들고 li안에 replTxt, 그 li를 ul안에 
+            
+            let makeLi = $("<li>");
+            
+            makeLi.append(replTxt);
+
+            getUl.append(makeLi);
+
+            $(a).parent().remove();
+
+        }
+
+    </script>
+
+</body>
+</html>

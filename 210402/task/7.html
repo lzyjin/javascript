@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 7</title>
+</head>
+<body>
+    <h1>배열 실습 문제2</h1>
+    <p>
+        다음 보기에 있는 문자열을 가지고 정답과 같이 만드세요.
+        별도의 문자열을 쓰면 안됌
+        그리고 출력 부분에 출력하도록 하면 됩니다
+        정답 brlove
+    </p>
+
+    <fieldset>
+        <legend>보기</legend>
+        <p>
+            <label id="stringla1">r b</label><br> 
+            <label id="stringla2">e v o l</label><br>
+        </p>
+    </fieldset>
+
+    <br><br>
+
+    <div id="result"></div>
+
+    <br><br>
+
+    <button onclick="create();">처리</button>
+
+    
+
+    <script>
+        const create = () => {
+
+            let arr1 = [];
+            let arr2 = [];
+
+            let str = document.getElementById("stringla1").innerHTML;
+            let str2 = document.getElementById("stringla2").innerHTML;
+
+           arr1 = str.split(" ");
+           arr2 = str2.split(" ");
+
+        //    console.log(arr1);
+        //    console.log(arr2);
+
+           arr1.reverse();
+           arr2.reverse();
+
+        //    console.log(arr1);
+        //    console.log(arr2);
+           
+           let result = document.getElementById("result").innerHTML;
+
+           for(let i=0; i < arr1.length; i++) {
+
+            document.getElementById("result").innerHTML += arr1[i];
+
+           }
+
+           for(let i=0; i < arr2.length; i++) {
+
+            document.getElementById("result").innerHTML += arr2[i];
+
+           }
+
+           console.log(result);
+
+        }
+    </script>
+
+    <style>
+        #result{
+            border: 1px red solid;
+        }
+    </style>
+</body>
+</html>

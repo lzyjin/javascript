@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제3</title>
+</head>
+<body>
+    <h3>HTML 태그에 접근 테스트</h3>
+    <p>
+        단, 구매자는 태그 이름으로 접근, 상품명은 아이디로 접근, 구매가격은 name값으로 접근할 것.
+    </p>
+
+    구매자 :<input type="text" id="name" name="" placeholder="구매자의 이름을 입력하세요">
+    <br>
+    <br>
+    상품명 : <input type="text" name="" id="productName" placeholder="구매 상품명을 입력하세요">
+    <br>
+    <br>
+    가격 : <input type="text" name="" id="price" placeholder="구매 가격을 입력하세요">
+    <br>
+    <br>
+    <button onclick="printData();">입력값 출력하기</button>
+    <br>
+    <br>
+    <div id="container"></div>
+
+    <style>
+        #container{
+
+            border: 1px black solid;
+            background-color: rgb(255, 255, 162);
+            width: 350px;
+            height: 100px;
+        }
+    </style>
+
+    <script>
+        const printData = () => {
+
+            let inputName = document.getElementById("name").value;
+            let inputProduct = document.getElementById("productName").value;
+            let inputPrice = document.getElementById("price").value;
+
+            document.getElementById("container").innerHTML = `구입자 : ${inputName}님<br>`;
+            document.getElementById("container").innerHTML += `구입상품 : ${inputProduct}<br>`;
+            document.getElementById("container").innerHTML += `구매가격 : ${inputPrice}원`;
+
+        }
+    </script>
+
+    
+</body>
+</html>

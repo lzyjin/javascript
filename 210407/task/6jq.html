@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6번 문제 제이쿼리로 풀기</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        li{
+            margin: 20px 0 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>실습문제 2</h1>
+
+    <fieldset>
+        <legend>납품정보</legend>
+        <ul>
+            <li>
+                상품명 : 
+                <select name="" id="product">
+                    <option value="apple">apple</option>
+                    <option value="cherry">cherry</option>
+                    <option value="melon">melon</option>
+                </select>
+                <br>
+            </li>
+            <li>
+                남품수량 :
+                <input type="text" id="quantity">
+            </li>
+            <li>
+                납품등급 : 
+                <input type="range" name="" id="grade" min="1" max="10">
+            </li>
+            <li>
+                기타사항 : 
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+            </li>
+        </ul>
+    </fieldset>
+
+    <button onclick="send();">send message</button>
+
+    <script>
+        const send = () => {
+
+            let product = $("select#product").val();
+            let grade = $("input#grade").val();
+            let quantity = $("input#quantity").val();
+            let etc = $("textarea").val();
+
+            alert(`상품명 : ${product}\n납품등급 : ${grade}\n납품수량 : ${quantity}\n기타사항 : ${etc}\n입력하신 내용이 맞습니까?`);
+        }
+    </script>
+</body>
+</html>

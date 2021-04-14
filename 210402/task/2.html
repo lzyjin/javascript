@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제2</title>
+</head>
+<body>
+
+    <h3>문제1. 색상 선택 후 변경 버튼을 클릭하면 색상이 변경되도록 만들어 보시오</h3>
+   
+   <style>
+        #block{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+
+    <div id="block"></div>
+    <input type="color" id="pickColor">
+    <button onclick="changeColor();">변경</button>
+    
+
+    <script>
+         
+         const changeColor = () => {
+
+            let color = document.getElementById("pickColor").value;
+
+            document.getElementById("block").style.backgroundColor = color;
+         }
+     </script>
+
+
+
+
+
+     <h3>문제 2. 버튼에 따른 크기 조절이 가능하게 만들어 보시오</h3>
+
+     <div id="block2"></div>
+    <button onclick="changeSize50();">50x50</button>
+    <button onclick="changeSize100();">원본(100x100)</button>
+    <button onclick="changeSize200();">200x200</button>
+
+    <style>
+        #block2{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+
+     <script>
+
+         const changeSize50 = () => {
+
+             document.getElementById("block2").style.width = "50px";
+             document.getElementById("block2").style.height = "50px";
+         }
+
+         const changeSize100 = () => {
+
+            document.getElementById("block2").style.width = "100px";
+            document.getElementById("block2").style.height = "100px";
+        }
+
+        const changeSize200 = () => {
+
+            document.getElementById("block2").style.width = "200px";
+            document.getElementById("block2").style.height = "200px";
+        }
+     </script>
+
+     
+</body>
+</html>

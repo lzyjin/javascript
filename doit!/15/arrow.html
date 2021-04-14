@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표 함수</title>
+</head>
+<body>
+    <script>
+
+        // 매개변수가 없을 경우 
+
+        // const hi = function() {
+        //     return "안녕하세요";
+        // }
+
+        // const hi = () => { return "안녕하세요" };
+
+        // const hi = () => "안녕하세요";
+
+
+        // 매개변수가 1개인 경우
+        let hi = function(user) {
+            document.write(user + "님, 안녕하세요");
+        }
+
+        let hi = user => { document.write(user + "님, 안녕하세요"); }
+
+
+        // 매개변수가 2개 이상인 경우
+        let sum = function(a, b) {
+            return a + b;
+        }
+
+        let sum = (a, b) => a + b;
+    </script>
+</body>
+</html>

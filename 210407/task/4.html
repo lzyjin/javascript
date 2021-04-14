@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 4</title>
+    <style>
+        table{
+            width: 600px;
+            border: 1px black solid;
+            border-collapse: collapse;
+        }
+        td, th{
+            border: 1px black solid;
+            padding: 5px;
+        }
+        h1{
+            text-align: center;
+        }
+        td>div{
+            margin-left: 250px;
+            margin-top: auto;
+            margin-bottom: auto;
+            height: 50px;
+            padding-top : 20px;
+        }
+        th{
+            color: coral;
+            text-align: right;
+            width: 120px;
+        }
+        th>p{
+            padding: 0 0 0 0;
+            margin: 0 0 0 0;
+            font-size: smaller;
+            color: blue;
+            font-style: italic;
+            font-weight: lighter;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1><u>거래처 등록</u></h1>
+
+    <table>
+        <tr>
+            <th>거래처명</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>전화번호</th>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <th>품명(중고품)</th>
+            <td>
+                메인보드<input type="checkbox" name="category" id="">
+                모니터<input type="checkbox" name="category" id="">
+                프린터<input type="checkbox" name="category" id="">
+                하드디스크<input type="checkbox" name="category" id="">
+                메모리<input type="checkbox" name="category" id="">
+                CPU<input type="checkbox" name="category" id="">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <p>
+                    모두 선택/해제
+                    <input type="checkbox" name="" id="selectAll">
+                </p>
+                품명(수입산)
+            </th>
+            <td id="select">
+                메인보드<input type="checkbox" name="category" id="">
+                모니터<input type="checkbox" name="category" id="">
+                프린터<input type="checkbox" name="category" id="">
+                하드디스크<input type="checkbox" name="category" id="">
+                메모리<input type="checkbox" name="category" id="">
+                CPU<input type="checkbox" name="category" id="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    <button>등록</button>
+                    <button>취소</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+   
+    <script>
+        let check = document.getElementById("selectAll");
+        check.addEventListener("change", (e) => {
+
+            document.querySelectorAll("td#select>input")
+        });
+    </script>
+</body>
+</html>

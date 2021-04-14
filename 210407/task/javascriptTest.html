@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최종실습</title>
+</head>
+
+<body>
+
+    <fieldset>
+
+        <legend>문제1</legend>
+        <p>input 태그에 숫자를 입력하고 버튼을 클릭하면, +10이 된 값을 alert으로 출력</p>
+        
+        <input type="text" id="input1">
+        <button id="plus10">클릭</button>
+
+        <script>
+            document.getElementById("plus10").addEventListener( "click", () => {
+                
+                let input = document.getElementById("input1").value;
+
+                alert(Number(input)+10);
+            } );
+        </script>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>문제 2</legend>
+        <p>input 태그에 숫자를 입력하고 버튼을 클릭하였을 때, 해당 값이 존재하는지 여부를 출력</p>
+        <input type="text" id="input2">
+        <button id="existcheck">클릭</button>
+        <br>
+        <div id="result"></div>
+    </fieldset>
+
+    <script>
+        let arr = [1, 2, 4, 7, 11, 16];
+
+        document.querySelector("button#existcheck").addEventListener("click", (e) => {
+
+            let input = document.querySelector("input#input2").value;
+
+            if(arr.indexOf(Number(input)) != -1) {
+
+                document.querySelector("div#result").innerHTML = input;
+
+            } else {
+
+                document.querySelector("div#result").innerHTML = "해당 숫자는 존재하지 않습니다";
+            }
+
+        });
+    </script>
+
+    <fieldset>
+        <legend>문제 3</legend>
+        <p>라디오 버튼을 클릭하면 value값을 이용해 해당 사이트로 이동하세요 </p>
+        <input type="radio" name="site" id="naver">네이버<br>
+        <input type="radio" name="site" id="google">구글<br>
+        <input type="radio" name="site" id="w3school">w3schools
+    </fieldset>
+
+    <script>
+        let inputTag = document.querySelectorAll("input[name=site]");
+
+        // 잘못된 코드
+        // inputTag.addEventListener("click" ,(e) => {
+
+        //     console.log(e.target);
+        //     // console.log(e.target.getAttribute("id"));
+        //     // window.location.href = "https://www.naver.com/";
+        // });
+
+
+        // querySelectAll는 해당되는 태그들은 배열로 출력하기 때문에 
+        // 각 태그에 이벤트를 등록하려면 forEach로 태그에 순회하며 이벤트를 걸어야한다
+        // console.log(inputTag);
+        // NodeList(3) [input#naver, input#google, input#w3school]
+
+    
+        inputTag.forEach((v, i) => {
+
+            v.addEventListener("click", (e) => {
+
+                // console.log(v);
+                // v가 각 input 태그임 
+
+                if(v.getAttribute("id") == "naver") {
+
+                    window.location.href = "https://www.naver.com/";
+
+                } else if(v.getAttribute("id") == "google") {
+
+                    window.location.href = "https://www.google.com/";
+
+                } else {
+
+                    window.location.href = "https://www.w3schools.com/";
+                }
+            });
+
+        });
+
+    </script>
+
+    <fieldset>
+        <legend>문제 4</legend>
+        <p>버튼을 클릭하면, 첫번째 체크박스의 항목을 체크해주세요</p>
+
+        <input type="checkbox" name="" id="Java">Java<br>
+        <input type="checkbox" name="" id="">Database<br>
+        <input type="checkbox" name="" id="">Web<br>
+        <button id="click">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#click").addEventListener("click", (e) => {
+
+            document.querySelector("input#Java").setAttribute("checked", "checked");
+
+        });
+    </script>
+
+    <fieldset>문제 5
+        <p>1~45 사이의 랜덤 숫자를 하나 생성해서 input 태그 안에 입력하세요</p>
+        랜덤 : <input type="text" id="inputRandom">
+        <button id="random">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#random").addEventListener("click", (e) => {
+
+            // console.log(Math.floor(Math.random()*45+1));
+
+            document.querySelector("input#inputRandom").value = Math.floor(Math.random()*45+1);
+        });
+    </script>
+
+    <fieldset>
+        <legend>문제 6</legend>
+        <p>open메소드를 사용하여 선택한 select태그의 해당페이지를 팝업창으로 실행하세요</p>
+        <select name="" id="site">
+            <option value="naver">네이버</option>
+            <option value="google">구글</option>
+            <option value="w3schools">w3schools</option>
+        </select>
+        <button id="gosite">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#gosite").addEventListener("click", (e) => {
+
+            let site = document.querySelector("select#site").value;
+
+            window.open(`https://www.${site}.com/`, "_blank", "width=500, height=500");
+
+        });
+    </script>
+
+    <fieldset>
+        <legend>문제 7</legend>
+        <p>숫자를 유니코드 순으로 출력하세요</p>
+        숫자 :<span id="number">1,2,3,11,21,22,215,6</span>
+        <button id="sortUnicode">클릭</button>
+    </fieldset>
+
+    <script>
+       document.querySelector("button#sortUnicode").addEventListener("click", (e) => {
+
+        let arr2 = [];
+
+        arr2 = document.querySelector("span#number").innerHTML.split(",");
+
+        console.log(arr2);
+
+        arr2.sort();
+
+        console.log(arr2);
+
+        document.querySelector("span#number").innerHTML = arr2;
+
+       });
+    </script>
+
+    <fieldset>
+        <legend>문제 8</legend>
+        <p>선택한 날짜부터 3일 후의 요일을 alert으로 출력해 주세요</p>
+        <input type="date" name="" id="inputDate">
+        <button id="printDate">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#printDate").addEventListener("click", (e) => {
+
+            let input = document.querySelector("input#inputDate").value;
+
+            // console.log(input, typeof(input));
+            // 2021-04-19 string
+
+            let date = new Date(input);
+
+            // console.log(date, typeof(date));
+
+            date.setDate(date.getDate()+3);
+
+            // console.log(date, typeof(date));
+
+            let day = date.getDay();
+
+            switch(day) {
+                case 0:
+                    alert("일요일");
+                break;
+                case 1:
+                    alert("월요일");
+                break;
+                case 2:
+                    alert("화요일");
+                break;
+                case 3:
+                    alert("수요일");
+                break;
+                case 4:
+                    alert("목요일");
+                break;
+                case 5:
+                    alert("금요일");
+                break;
+                case 6:
+                    alert("토요일"); 
+                break;
+            }
+
+
+        });
+    </script>
+
+    <fieldset>
+        <legend>문제 9</legend>
+        <p>원하는 구구단을 입력하고, alert으로 해당 단을 출력하세요</p>
+        <input type="text" id="inputNumber">
+        <button id="printData">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#printData").addEventListener("click", (e) => {
+
+            let input = document.querySelector("input#inputNumber").value;
+
+            input = Number(input);
+
+            let data = "";
+
+            for(let i=1; i <= 9; i++) {
+
+                data += `${input} * ${i} = ${input*i}\n`;
+            }
+
+            // console.log(data);
+
+            alert(data);
+
+        });
+    </script>
+
+    <fieldset>
+        <legend>문제 10</legend>
+        <p>input 태그에 입력한 문자열과, span 태그의 문자열을 합쳐서 출력하세요 </p>
+        <input type="text" id="userName">
+        <span id="hello">님, 안녕하세요</span>
+        <button id="printHello">클릭</button>
+    </fieldset>
+
+    <script>
+        document.querySelector("button#printHello").addEventListener("click", (e) => {
+
+            let userName = document.querySelector("input#userName").value;
+
+            let hello = document.querySelector("span#hello").innerHTML;
+
+            let helloData = userName+hello;
+
+            alert(helloData);
+        });
+
+    </script>
+</body>
+</html>

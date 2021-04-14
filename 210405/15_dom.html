@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>테이블 태그 만들기</h3>
+    <p>5*5 테이블 만들기</p>
+    <p>사용자가 입력한대로 테이블 만들기</p>
+
+
+    <input type="number" id="row" maxlength="10" size="2">
+    <input type="number" id="col" maxlength="10" size="2">
+
+    <button onclick="createTable();">테이블 생성</button>
+    <div id="container"></div>
+
+    <script>
+
+        const createTable = () => {
+
+            // table 만들기
+            let table = document.createElement("table"); // 객체 반환 -> 변수 table에 저장
+
+            // tr 5개 만들기 반복문
+            // row번 반복
+            let row = document.getElementById("row").value;
+
+            for(i=0; i < row; i++) {
+
+                let tr = document.createElement("tr");
+
+                // td 5개 만들기 반복문
+                // col번 반복 
+                let col = document.getElementById("col").value;
+
+                for(let j=0; j < col; j++) {
+
+                    let td = document.createElement("td");
+
+                    if(j == 4) {
+                        
+                        let button = document.createElement("button");
+                        let buttontext = document.createTextNode("상세화면");
+
+                        button.appendChild(buttontext);
+                        td.appendChild(button);
+
+                        // 버튼에 이벤트 생성 
+                        // button.addEventListener("click", (e) => {
+                        //     alert("공사중");
+                        // });
+
+                    } else {
+
+                        let text = document.createTextNode(j);
+
+                        //td.setAttribute("align", "center");
+                        td.style.textAlign = "center";
+
+                        // 내용을 td에 연결
+                        td.appendChild(text);
+                        
+                    }
+
+                    // td를 tr에 연결
+                    tr.appendChild(td);
+
+                }
+
+                // tr을 table에 연결
+                table.appendChild(tr);
+            
+                // 테이블에 style 속성 추가 
+                // 보통은 style속성으로 준다
+                table.setAttribute("height", "300");
+                table.setAttribute("width", "300");
+                //table.setAttribute("border", "1");
+                table.style.border = "1px skyblue solid";
+            } 
+
+            // table을 div에 연결
+            document.querySelector("#container").appendChild(table);
+
+        }
+    </script>
+    
+
+    <h3>클릭하면 input버튼이 파일추가용 입력창이 생성되는 버튼 만들기</h3>
+    
+    <input type="file">
+    <button onclick="create();">파일 추가버튼 생성 </button>
+    <div id="container2"></div>
+
+
+    <script>
+
+        let count = 0;
+
+        const create = () => {
+
+            let input = document.createElement("input");
+        
+            let div = document.getElementById("container2");
+
+            input.style.display = "block";
+            input.setAttribute("type", "file");
+
+            // file 타입 input태그는 name 속성이 꼭 필요하다
+            // 이름을 바꿔가면서 만들기 위해 변수 필요 
+            input.setAttribute("name", "file" + count++);
+
+            div.appendChild(input);
+
+        }
+    </script>
+
+
+
+
+
+    <h2>생성된 태그를 원하는 위치에 넣기</h2>
+    <p>
+        지금까지는 선택한 태그에 맨 밑에 추가하는것만 됐었음
+        지금부터는 선택한 태그에 원하는 위치에 추가하는 법을 배운다 ! 
+
+        지정태그.insertAdjacentElement("예약어", 태그);
+
+        예약어 
+        beforebegin : 지정한 태그의 앞에 ( 형제 )
+        afterend : 지정한 태그의 뒤에 ( 형제 )
+
+        beforeend : 지정한 태그의 맨 밑 자식 ( appendChild 와 동일)
+        afterbegin : 지정한 태그의 맨 위 자식
+    </p>
+
+    <button onclick="beforeendTest();">맨 마지막 자식</button>
+    <button onclick="afterbeginTest();">맨 앞 자식</button>
+
+    <button onclick="beforebeginTest();">지정태그 앞에</button>
+    <button onclick="afterendTest();">지정태그 뒤에</button>
+
+    <div id="childTest">
+        <h2>기준태그</h2>
+    </div>
+
+    <script>
+        const beforeendTest = () => {
+
+            let parent = document.getElementById("childTest");
+            let p = document.createElement("p");
+            let txt = document.createTextNode("before추가추가");
+
+            p.appendChild(txt);
+
+            parent.insertAdjacentElement("beforeend", p);
+
+        }
+
+        const afterbeginTest = () => {
+
+            let parent = document.getElementById("childTest");
+            let p = document.createElement("p");
+            let txt = document.createTextNode("after추가추가");
+
+            p.appendChild(txt);
+
+            parent.insertAdjacentElement("afterbegin", p);
+
+        }
+
+        const beforebeginTest = () => {
+
+            let parent = document.getElementById("childTest");
+            let h3 = document.createElement("h3");
+            let txt = document.createTextNode("앞에 추가하기");
+
+            h3.appendChild(txt);
+            parent.insertAdjacentElement("beforebegin", h3);
+
+        }
+
+        const afterendTest = () => {
+
+            let parent = document.getElementById("childTest");
+            let h3 = document.createElement("h3");
+            let txt = document.createTextNode("뒤에 추가하기");
+
+            h3.appendChild(txt);
+            parent.insertAdjacentElement("afterend", h3);
+
+        }
+    </script>
+
+
+
+
+
+    <h2>생성된 태그의 style 속성 조작(설정)하기 </h2>
+    <p>
+        생성된 태그 객체에는 style이라는 property(속성)이 있다. 그 속성을 이용해서 태그의 css style을 지정할 수 있다.
+        1. Element 객체의 프로퍼티는 직접접근 가능하므로 태그명.style.style속성명 = "속성값"
+        2. Element 객체의 setAttribute함수를 이용해서 style 속성을 설정할 수 있다
+
+        주의! 직접접근으로 style 속성을 설정할때는 -가 들어간 속성은 -를 없애고 다음 영문을 대문자로 변경해서 사용한다 
+        ex) font-family -> fontFamily
+    </p>
+    
+    <button onclick="styleTest(this);">스타일 다루기</button> <!-- 속성부분 다시 공부 -->
+ 
+    <script>
+        const styleTest = (e) => {
+
+            let el = document.createElement("img");
+            console.log(el);
+            console.dir(el); // style속성을 누르면 확인 가능 -> 이런저런 속성들 확인 가능 
+
+            el.src = "https://tse4.mm.bing.net/th?id=OIP.W8MzPIfeo3nMfBSdat8bigHaLG&pid=Api";
+            el.style.height = "400px";
+            el.style.width = "300px";
+            el.style.borderRadius = "80px";
+
+            el.setAttribute("style", "height: 700px; width:500px; border-radius: 200px"); // 속성이 이걸로 바뀜 
+
+            e.insertAdjacentElement("afterend", el);
+
+        }
+    </script>
+
+
+
+    <h2>특정 태그에서 원하는 태그를 검색하기 ( 탐색 ) 중요!!!! </h2> 
+    <p>
+        특정 태그를 가져와 그 태그가 가지고 있는 자식 태그들을 확인하기
+        ( 이벤트가 발생했을 때 특정 태그를 바꾸거나 하기 위해 중요한 기능이다 )
+
+        Element 객체의 property로, 자식이나 형제의 값을 가지고 있다
+
+        자식속성
+        children속성 : 지정된 태그에 속한 자식 태그들
+
+        부모속성
+        parentElement속성 : 지정된 태그의 부모 태그
+
+        형제속성
+        previousElementSibling속성 : 지정된 태그의 위에 있는 형제 태그
+        nextElementSibling속성 : 지정된 태그의 아래에 있는 형제 태그
+
+        * 위의 모든 속성들은 여러번 사용할 수 있다
+        그거에 그 다음에 그 다음다음... 이런식으로 
+
+    </p>
+
+    <button onclick="searchElement(this);">태그 탐색하기</button>
+    <div id="searchTag">
+        <table>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+        </table>
+
+        <ul>
+            <li>html</li>
+            <li>css</li>
+            <li>javascript</li>
+            <li>jquery</li>
+        </ul>
+        
+    </div>
+
+    <script>
+        const searchElement = (e) => { // button 자기자신이 e 
+
+            // div의 자식 태그 확인하기 
+            let table = document.getElementById("searchTag");
+
+
+            // 자식태그만 출력되는거지. 후손태그가 출력되는것은 아니다.
+            console.log(table.children); // HTMLCollection(2) [table, ul]
+
+
+            let c = table.children;
+            console.log(c[0]); // table태그 
+            console.log(c[1]); // ul 태그
+
+
+            console.log(c[0].children); // HTMLCollection [tbody]
+            console.log(c[1].children); // HTMLCollection(4) [li, li, li, li]
+
+
+            // c.forEach(element => { // 15_dom.html:298 Uncaught TypeError: c.forEach is not a function
+            //     console.log(element);
+            // });
+
+            // c는 객체지 배열이 아니라서 forEach를 쓸 수없다
+            // 하지만 방법이 있다!
+
+            // 호출하는 방법
+            Array.prototype.forEach.call(c, element => {
+
+                console.log(element); // table태그와 ul태그
+
+                if(element.tagName == 'TABLE') {
+
+                }
+            });
+
+            // 이 방법이 복잡하면 for문 사용하면 된다
+            for(let i=0; i < c.length; i++) {
+
+                console.log(c[i]); // table태그와 ul태그
+
+                if(c[i].tagName == "UL") {
+
+                }
+            }
+
+            console.log(e.parentElement); // body태그 출력된다 -> button의 부모 태그가 body니까 
+           
+            console.log(e.parentElement.parentElement); // html태그 
+
+            console.log(document.body.children); // body태그에 속한 모든 자식태그들이 다 출력된다 
+
+
+
+            // 자식태그인 p태그의 스타일속성 바꾸기
+            let all = document.body.children;
+
+            Array.prototype.forEach.call(all, e => {
+
+                if(e.tagName == "p") {
+
+                    e.style.color = "darkgreen";
+                    e.style.fontSize = "30px"; // 왜 안되지??????????
+                }
+            });
+
+            // 형제 찾기
+
+            // 같은 레벨의 밑(다음) 태그
+            console.log(e.nextElementSibling); // div
+
+            // 같은 레벨의 위(앞) 태그 
+            console.log(e.previousElementSibling); // p 
+
+            console.log(e.previousElementSibling.previousElementSibling); // h2 태그
+
+        }
+
+    </script>
+
+
+
+
+
+    <h3>클래스 속성 관리하기</h3>
+    <p>
+        css를 미리 클래스이름으로 지정한 다음 태그에 클래스를 부여하여 css를 적용하는 방식
+    </p>
+
+    <style>
+        .back1{
+            background-color: navy;
+            color: pink;
+        }
+        .back2{
+            background-color: pink;
+            color: navy;
+        }
+        .font{
+            font-size: 32px;
+            font-weight: bolder;
+            text-shadow: 3px 3px 5px gray;
+        }
+    </style>
+
+    <h2 id="target">오늘은 월요일. 월요병이 없는 날...Rclass 화이팅</h2>
+
+    <button onclick="addClass();">back1</button>
+    <button onclick="removeClass();">지우기</button>
+
+    <script>
+        const addClass = () => {
+
+            let target = document.getElementById("target");
+        
+            console.dir(target); // h2#target의 속성들 볼 수 있음
+
+            // 속성중에서 classList와 className이 있는데
+            // 만약에 class가 class = "a b c "이렇게 되어있다면  className은 "a b c"가 된다
+            // classList는 classList: DOMTokenList(3) ["a", "b", "c", value: "a b c"]
+            
+
+            // target.className = "back1 font"; // 이렇게 작성해서 해당 클래스의 스타일 속성을 적용할 수 있다
+            // target.className = "back2";
+
+            // 추가 방법 2 
+            // target.classList.add("back2");
+            // target.classList.add("font");
+
+
+            // for문으로 더 간단하게 작성 가능 
+            for(let i=0; i < target.classList.length; i++) {
+                
+                if(target.classList[i] == 'back1') {
+
+                    target.classList.remove("back1");
+                    target.classList.add("back2");
+                    break;
+
+                } else if(target.classList[i] == 'back2') {
+
+                    target.classList.remove("back2");
+                    target.classList.add("back1");
+                    break;
+
+                } else {
+                    
+                    target.classList.add("back1");
+                }
+            }
+            target.classList.add("font");
+        }
+
+        // 클래스를 삭제하는 함수
+        const removeClass = () => {
+
+            let target = document.getElementById("target");
+        
+            // target.className = "back1"; // font클래스가 사라져서 font-shadow스타일속성이 해제된다
+
+
+            // 그 클래스가 있으면 지워 ! 라고 하고싶어서 조건식을 사용한다 
+            // 이 때는 className보다 classList를 사용하는게 효과적
+
+            let clist = target.classList;
+            for(let i=0; i < clist.length; i++) {
+                console.log(clist[i]); // back1 font 
+
+                if(clist[i] == 'font') {
+
+                    clist.remove("font");
+                }
+            }
+        }
+    </script>
+
+
+
+    <h2>태그(Element) 삭제하기</h2>
+    <p>
+        페이지에 있는 태그, 생성된 태그를 삭제하는 함수
+        remove() : 자기 자신을 삭제하는 함수
+        부모태그.removeChild() : 자기 자식을 삭제하는 함수
+    </p>
+
+    <button onclick="removeTest();">removeChild()로 객체 삭제하기</button>
+    <button onclick="removeTest2();">remove()로 객체 삭제하기</button>
+    <button onclick="changePosition();">변경</button>
+
+    <div id="removeChild">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <script>
+        let lis = document.querySelectorAll("#removeChild li");
+
+        for(let i=0; i < lis.length; i++) {
+
+            lis[i].addEventListener("click", (e) => {
+
+                e.target.remove(); // li태그를 클릭하면 삭제되는
+            });
+        }
+
+        const removeTest = () => {
+
+            let parent = document.querySelector("#removeChild");
+
+            let ul = document.querySelector("#removeChild>ul");
+
+            ul.removeChild(ul.childNodes[0]); // 버튼을 클릭할 때마다 위에서부터 하나씩 삭제
+            
+        }
+
+        const removeTest2 = () => {
+
+            let del = document.querySelector("#removeChild>ul>li:last-child");
+            del.remove();
+
+
+        }
+
+        const changePosition = () => {
+
+            lis = document.querySelectorAll("#removeChild li");
+
+            let ul = document.querySelector("#removeChild>ul");
+
+            ul.appendChild(lis[0]); // 원래 있는 태그를 appendChild()하면 태그의 순서가 바뀐다 
+        }
+
+    </script>
+
+
+
+
+    <!-- 이미지를 3개 넣고 버튼을 클릭하면 이미지의 위치가 변경될 수 있게 해보자 -->
+
+    <button onclick="changeImage();">이미지 변경</button>
+    <button onclick="imageStop();">정지</button>
+
+    <div id="imageblock">
+        <img width="250" height="300" src="https://pbs.twimg.com/profile_images/1336131563055054854/_VIQXQrP_400x400.jpg" alt="">
+        <img width="250" height="300"  src="https://i.pinimg.com/originals/89/da/b2/89dab26e59ab85075b336afac72953af.jpg" alt="">
+        <img width="250" height="300"  src="https://1.bp.blogspot.com/-r51FYGMUrPQ/XbsDhlv6EEI/AAAAAAAAHqM/sVdAvCTw8jM10eC7AwTSIrgKIyx7l98NQCLcBGAsYHQ/s1600/EIDXfhGUwAI-Lx0.jpg" alt="">
+    </div>
+
+    <style>
+        img{
+            border-radius: 200px;
+        }
+    </style>
+
+    <script>
+    
+        let images = document.getElementsByTagName("img");
+
+        let inter;
+
+        const changeImage = () => {
+
+            inter = setInterval(() => {
+
+                images = document.getElementsByTagName("img");
+
+                let div = document.querySelector("#imageblock");
+
+                div.appendChild(images[0]);
+
+            }, 100);
+
+        }
+
+        const imageStop = () => {
+
+            clearInterval(inter);
+
+            images[1].style.border = "5px yellow solid";
+
+        }
+    </script>
+
+
+</body>
+</html>

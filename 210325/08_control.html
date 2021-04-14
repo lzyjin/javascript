@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제어문 활용하기</title>
+</head>
+
+<body>
+    <h2>조건문</h2>
+    <p>
+        if, if ~ else, if ~ else if ~ else, switch <br>
+        자바랑 동일하다 
+    </p>
+
+    <div>
+        <p class="a">p a</p>
+        <p>p</p>
+        <p class="a">p a</p>
+        <p class="a">p a</p>
+        <p>p</p>
+    </div>
+
+    <button onclick="checkP();">class가 a인 태그 찾기</button>
+
+    <script>
+
+        console.log("test4");
+        function checkP() {
+
+            let ps = document.getElementsByTagName("p");
+            console.log( ps );
+
+            for(let i=0; i < ps.length; i++) {
+
+                // console.log( ps[i] );
+                // console.dir( ps[i] );
+                console.dir( ps[i].className ); // class가 a인것은 a라고 나오고, 아닌애들은 빈칸
+
+                if(ps[i].className == 'a') {
+
+                    ps[i].style.backgroundColor="pink";
+                    ps[i].style.color="yellow";
+
+                } else {
+
+                    ps[i].style.backgroundColor='gray';
+                    ps[i].style.color='white';
+                }
+            }
+        }
+    </script>
+
+
+
+
+    <ul>
+        <li>가</li>
+        <li>나다</li>
+        <li>라마바</li>
+        <li>1</li>
+        <li>23</li>
+        <li>456</li>
+        <li>a</li>
+        <li>bc</li>
+        <li>def</li>
+        <li>1000</li>
+    </ul>
+
+    <div id="area"></div>
+    <button onclick="lichange();">리스트 변경</button>
+
+    <script>
+        // li태그에 있는 글자가 -> 속성에 있는 값을 가져올 때 속성을 호출하면 가져올 수 있다. 
+        // 1개면 글자색을 pink
+        // 2개면 crimson(
+        // 3개면 magenta
+        // 그 외면 배경색을 royal blue
+
+        function lichange() {
+
+            let content = document.getElementsByTagName("li");
+            let val = content.innerHTML;
+            
+            
+            for(let i=0; i < content.length; i++) {
+
+                let val = content[i].innerHTML; // 이렇게 선언하는게 코드 중복을 줄여줘 
+
+                /*
+                if(content[i].innerHTML.length == 1) { 
+
+                    content[i].style.color="pink";
+
+                    } else if(content[i].innerHTML.length == 2) {
+
+                    content[i].style.color="crimson";
+
+                    } else if(content[i].innerHTML.length == 3) {
+
+                    content[i].style.color = "magenta";
+
+                    } else {
+
+                    content[i].style.backgroundColor = "royalblue";
+                    }
+                    */
+
+                // 0326 
+                // switch문으로 작성 가능   // 다시 해보기 
+                let color = "";
+            
+                /*
+                switch(val.length) {
+                    case 1: color="pink"; break;
+                    case 2: color="crimson"; break;
+                    case 3: color="magenta"; break;
+                    default: color="royalblue"; break;
+                }
+                content[i].style.color = color;
+                */
+
+                // switch문의 case문에 조건문을 넣을 수 있다 
+                switch(true) {
+
+                    case val.length == 1: 
+                        color="pink"; 
+                    break;
+
+                    case val.length == 2: 
+                        color="crimson"; 
+                    break;
+
+                    case val.length == 3: 
+                        color="magenta"; 
+                    break;
+
+                    default: 
+                        color="royalblue"; 
+                    break;
+                }
+
+                content[i].style.color = color;
+                
+            } // for
+            
+
+        }
+
+        
+    </script>
+
+
+
+
+
+    <h2>반복문에 대해 알아보자</h2>
+    <p>
+        for, for~in, while, do~while, break, continue
+    </p>
+
+    <button onclick="checkList();">반복문 활용하기</button>
+
+    <script>
+        function checkList() {
+
+            let lis = document.getElementsByTagName("li");
+
+            
+            // for(let i=0; i < lis.length; i++) {
+
+            //     let temp = lis[i].innerHTML; // innerHTML은 문자열로 가져옴 
+
+            //     if(temp == '23') { // 23이라고 적어도 자동형변환해서 비교하니까 가능
+
+            //         document.getElementById("area").innerHTML="<p style = 'color:brown'>" + temp + "</p>"; 
+
+            //     }
+            // }
+            
+
+            
+            let i=0;
+            while(true) {
+
+                let temp = lis[i++].innerHTML;
+
+                if(temp == '23') {
+
+                    document.getElementById("area").innerHTML="<p style=background-color:royalblue;>" + temp + "</p>";
+                
+                    break;
+                }
+            }
+            
+
+        }
+    </script>
+
+
+
+</body>
+</html>

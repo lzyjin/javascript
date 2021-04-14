@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4번 제이쿼리로 풀기</title>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <style>
+        div#result{
+            border: 1px red solid;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>배열 실습 문제 2</h1>
+    
+    <fieldset>
+        <legend>보기</legend>
+        <label id="str1">S B</label><br>
+        <label id="str2">e v o l</label><br>
+    </fieldset>
+
+    <br>
+    <br>
+
+    <div id="result"></div>
+
+    <br>
+
+    <button onclick="change();">처리</button>
+
+    <script>
+        const change = () => {
+
+            let arr1 = [];
+            let arr2 = [];
+
+            arr1 = $("label#str1").html().split(" ");
+            arr1.reverse();
+            // console.log(arr1);
+
+            arr2 = $("label#str2").html().split(" ");
+            arr2.reverse();
+
+            arr1 = arr1.concat(arr2);
+
+            // console.log(arr1);
+
+            $("div#result").html(arr1);
+
+        }
+    </script>
+</body>
+</html>

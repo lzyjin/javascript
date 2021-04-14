@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window 객체 알아보기</title>
+</head>
+<body>
+    <h1>윈도우 객체</h1>
+    <p>
+        윈도우 객체는 자바스크립트의 최상위 객체로 모든 객체와 함수를 가지고 있으며,
+        기본 객체로 설정되어 있다.
+        browser 한개마다 한개의 윈도우 객체가 생성된다.
+
+        윈도우객체의 주요 자식객체
+        BOM
+        location : 브라우저의 url주소를 설정, 정보
+        navigator : 브라우저에 대한 정보, 미디어스트림 등의 설정을 가져온다
+        screen : 사용자 화면에 대한 정보 
+        history : 페이지이동 이력 정보 
+
+        DOM
+        document : 브라우저의 html태그들을 객체화해서 처리하는 객체 
+
+        주요 함수 윈도우( 연 창 )를 조작하고, 다른 추가 기능 ( 입력, 알림, 새창 열기, 주기적인 실행 등 )
+        resizeTo()
+        moveTo()
+        focus()
+        height
+        width
+        alert, prompt, confirm, setInterval, setTimeout...
+    </p>
+
+    <script>
+        console.log(window);
+    </script>
+
+
+
+
+    <h1>윈도우 함수 이용하기</h1>
+
+    <h3>윈도우 open 함수</h3>
+
+    <p>
+        새 창을 생성하는 함수
+        [window.]open('', '', '') : 3개의 문자열이 매개변수로 들어온다 
+        매개변수
+        첫번째 : 새 창을 열었을 때 오픈할 페이지 주소(url), 공란일 경우 빈 페이지
+        두번째 : target속성 : _self, _blank 
+        세번째 : 새로 오픈하는 창에 대한 설정 ( 크기 )
+    </p>
+
+    <button onclick="newWindow();">새창열기</button>
+    <button onclick="childControl();">자식객체 조작하기</button>
+    <div id="container"></div>
+
+    <p>
+        open함수는 새로 생긴 윈도우 객체를 반환한다
+        반환받은 윈도우 객체로 부모페이지에서 자식창을 수정할 수 있다.
+        자식 윈도우에서는 opener속성을 통해 부모의 window 객체를 가지고 있다. 
+    </p>
+
+    <script>
+        const newWindow = () => {
+            open(); // 빈 새창 열기
+            window.open("http://www.naver.com", "_self", "");
+        /*    let child = open("object.html", "_blank", "height=300, width=400");
+            console.log(child);
+            // child.document.write("<h1>호호호호</h1>"); // 주석처리하면 위의 window.html창이 열린다
+            let el = child.document.getElementById("userId");
+            console.log(el);
+            */
+        }
+
+        let child;
+        const childControl = () => {
+
+            child = open("", "_blank", "width=400, height=300");
+            let temp = "<script>";
+                temp += "function sendData() {";
+                temp += "let con = opener.document.getElementById('container');";
+                temp += "let val = document.getElementById('data').value;";
+                temp += "con.innerHTML = '<h2>' + val + '</h2>';}";
+                temp += "</";
+                temp +- "script>";
+                
+                child.document.write("<html><body><h2>부모창에서 작성한 내용</h2><input id='data' type = 'text'><button onclick='sendData();'>데이터 전송</button>"+ temp + "</body></html>"); 
+        }
+    </script>
+</body>
+</html>

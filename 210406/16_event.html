@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 처리하기</title>
+</head>
+<body>
+
+    <h1>이벤트 속성 알아보기</h1>
+
+    <dl>
+        <dt>input태그 관련 이벤트</dt>
+        <dd>focus : input태그에 focus(해당하는 요소가 두껍게 처리되거나 커서가 깜빡거리는것 ? )되었을 때 발생, *주의* blur와 같이 처리되면 무한루프가 된다</dd>
+        <dd>blur : input태그의 focus가 사라졌을 때 발생</dd>
+        <dd>change : input태그의 value속성의 값이 변경됐을 때 발생 (select태그에서 주로 사용 -> 골라졌을 때가 시점) </dd>
+        <dd>submit : form태그에서 submit타입을 클릭했을 때 발생 ( form 태그로 데이터를 전송할 때 발생 ) </dd>
+        <dd>rest : form태그에서 reset타입을 클릭했을 때 발생</dd>
+    </dl>
+
+    <dl>
+        <dt>mouse 관련 이벤트</dt>
+        <dd>click : 마우스를 좌클릭 했을 때 발생</dd>
+        <dd>dbclick : 마우스를 더블클릭 했을 때 발생</dd>
+        <dd>mouseenter : 지정한 영역 안에 마우스가 들어왔을 때 발생</dd>
+        <dd>mouseleave : 지정한 영역 안에서 마우스가 나갔을 때 발생</dd>
+    </dl>
+
+    <dl>
+        <dt>key 관련 이벤트</dt>
+        <dd>keyup : 키가 올라왔을 때 발생</dd>
+        <dd>keydown : 키가 내려갔을 때 발생</dd>
+        <dd>keypress : 키가 눌렸을 때</dd>
+    </dl>
+
+    <dl>
+        <dt>윈도우 창 관련 이벤트</dt>
+        <dd>load : 페이지의 태그들이 다 로그되었을 때 ( 페이지 관련 이벤트 )</dd>
+        <dd>resize : 윈도우 크기가 조정되었을 때 발생 </dd>
+        <dd></dd>
+    </dl>
+    
+
+    <h2>고전이벤트방식으로 이벤트 핸들러(함수) 등록하기</h2>
+    <h3>클릭하면 변경1</h3>
+    <h3>클릭하면 변경2</h3>
+    <h3>클릭하면 변경3</h3>
+
+    <script>
+
+        // h3를 클릭하면 글자색을 변경하는 이벤트 핸들러 등록
+
+        let elements = document.querySelectorAll("h3");
+        console.log(elements); // NodeList(3) [h3, h3, h3] querySelectorAll로 부르면 NodeList로 반환
+
+
+        // 고전방식으로 이벤트 연결하기 : onclick속성에 함수를 등록
+        // e로 선언한 매개변수에는 Event객체가 자동으로 대입되어 
+        elements[0].onclick = (e) => {
+
+            console.log(e); 
+            // MouseEvent {isTrusted: true, screenX: 66, screenY: 681, clientX: 66, clientY: 570, …}
+            // 이벤트 객체 MouseEvent 반환 
+
+            console.log(e.target); 
+            // <h3>클릭하면 변경1</h3>
+            // e.target = 이벤트가 발생한 객체 
+
+            e.target.style.color = "pink";
+
+            console.log(e.x, e.y); 
+            // 클릭한 위치( 좌표 ) 출력 
+        }
+
+        elements[1].onmouseenter = (e) => {
+
+            console.log(e.target);
+            e.target.style.backgroundColor = "pink";
+        }
+
+    </script>
+
+
+    <h2>인라인 이벤트 방식 </h2>
+    <p>
+        태그의 이벤트 속성에 직접 값(함수)를 넣는 것 
+    </p>
+
+    <!-- <h4 onmouseover="alert('마우스올라감')">인라인으로 이벤트 설정</h4> -->
+    
+    <!-- 우리는 script태그에 쓴 함수를 호출하는 방식을 많이 사용했다  -->
+
+
+
+    <h2>표준 이벤트 방식</h2>
+    <p>
+        addEventListener()함수를 이용하는 방식
+        Element 객체에 있는 이벤트 연결 함수임
+        두개의 매개변수를 설정한다
+        첫번째 매개변수 : 이벤트 속성
+        두번째 매개변수 : 이벤트 핸들러( 함수 ) *매개변수로 event를 받는다
+    </p>
+
+    <form action="">
+        <input type="text" name="userId" id="userId" placeholder="아이디 입력"><br>
+        <input type="password" name="pw" id="pw" placeholder="비밀번호 입력"><br>
+        <input type="password" id="pwcheck"><span id="result"></span>
+
+    </form>
+
+    <script>
+
+        let id = document.getElementById("userId");
+        let pw = document.getElementById("pw");
+
+        id.addEventListener("keyup", (e) => {
+
+            e.target.style.color = "white";
+            e.target.style.backgroundColor = "blue";
+        });
+
+
+        // focus 이벤트 설정
+        id.addEventListener("focus", (e) => {
+            e.target.style.backgroundColor = "lime"; 
+        })
+
+
+        let pwcheck = document.getElementById("pwcheck");
+
+
+        //pwcheck.addEventListener("keyup", (e) => {
+        pwcheck.addEventListener("blur", (e) => {
+
+            let pw = document.getElementById("pw");
+            let result = document.getElementById("result");
+
+            if(pw.value == e.target.value) {
+
+                result.innerHTML = "비밀번호가 일치합니다";
+                result.style.color = "green";
+
+            } else {
+
+                result.innerHTML = "비밀번호가 일치하지 않습니다";
+                result.style.color = "red";
+
+            }
+        });
+    </script>
+
+
+
+    <select name="title" id="title">
+        <option value="제목">제목</option>
+        <option value="내용">내용</option>
+        <option value="작성자">작성자</option>
+    </select>
+
+    <input type="search" name="keyword" id="keyword">
+
+    <script>
+        let $select = document.getElementById("title");
+
+        $select.addEventListener("change", (e) => {
+
+            // alert("선택됨"); 체크용 
+
+            // document.getElementById("keyword").focus();
+            // 이렇게 해도 되나 태그가 많을 경우 아이디로 호출해서 포커스를 조절하는것은 너무 힘든일 
+
+
+            // 이 방법 선호 
+            console.log(e.target.nextElementSibling); // input태그가 선택된다 
+
+
+            //  형제속성
+            //previousElementSibling속성 : 지정된 태그의 위에 있는 형제 태그
+            //nextElementSibling속성 : 지정된 태그의 아래에 있는 형제 태그
+
+            e.target.nextElementSibling.focus();
+
+        });
+    </script>
+
+
+
+
+    
+    <h2>윈도우에 이벤트 설정하기</h2>
+
+    <script>
+
+        window.addEventListener("resize", (e) => { // 창의 크기가 바뀌는 시점이 이벤트 발생 시점
+
+            //console.log(e); // 확인용 
+
+            // 변경된 윈도우의 길이 확인하기
+            console.log(e.target.innerWidth, e.target.innerHeight);
+            // e.target = 이벤트가 발생한 객체 
+        });
+
+        window.addEventListener("scroll", (e) => { // 스크롤을 움직이면 이벤트 발생 
+
+            // console.log(e);
+
+            //console.log(window.scrollX, window.scrollY);
+            // y가 세로 스크롤, x가 가로 스크롤
+            
+        });
+    </script>
+
+
+
+    <h2>생성된 태그에 이벤트 설정하기</h2>
+
+    <button onclick="createTable();">테이블 생성</button>
+    <div id="tbcontainer"></div>
+
+    <!-- 
+        5*5 테이블을 생성하시오 
+        마지막 5열에는 버튼태그를 추가할 것
+        버튼 태그를 클릭하면 버튼의 전체 행의 배경색을 빨강색으로 변경하기
+    -->
+
+    <script>
+
+        const createTable = () => {
+            
+            let table = document.createElement("table");
+
+            for(let i=0; i < 5; i++) {
+
+                let tr = document.createElement("tr");
+
+                for(let j=0; j < 5; j++) {
+
+                    let td = document.createElement("td");
+
+                    if(j == 4) {
+
+                        let button = document.createElement("button");
+
+                        let btxt = document.createTextNode("배경색 변경");
+                        
+                        button.appendChild(btxt);
+                        td.appendChild(button);
+
+                        button.addEventListener("click", (e) => {
+
+                            tr.style.backgroundColor = "red";  
+                        } );
+                        
+
+                    } else {
+
+                        let txt = document.createTextNode(i);
+
+                        td.appendChild(txt);
+                        
+                        td.style.width = "50px";
+                    }
+
+                    tr.appendChild(td);
+
+                }
+
+                table.appendChild(tr);
+                table.style.textAlign = "center";
+            }
+
+            let result = document.getElementById("tbcontainer");
+            
+            result.appendChild(table);
+
+        }
+    </script>
+
+
+
+
+    <!-- <p>선생님 풀이</p>
+    <button id="createTable" >테이블 생성</button>
+
+    <script>
+        document.querySelector("#createTable").addEventListener("click", e => {
+            let $table = document.createElement("table");
+
+            for(let i=0; i < 5; i++) {
+
+                let $tr = document.createElement("tr");
+
+                for(let j=0; j < 5; j++) {
+
+                    let $td = document.createElement("td");
+
+                    if(j == 4) {
+
+                        const btn = document.createElement("button");
+                        btn.innerText = "변경";
+
+                        btn.addEventListener("click", (e) => {
+
+                            // 명시적으로 알 수 있으니까 이 코드를 쓰도록 하자 ... 
+                            // e.target.parentElement.parentElement.style.backgroundColor = "red";
+                            $tr.style.backgroundColor = "red"; // 클로저 개념 이용 
+                        });
+
+                        $td.appendChild(btn);
+
+                    } else {
+
+                        $td.innerHTML = `${i}행 ${j}열`;
+                    }
+
+                    $tr.appendChild($td);
+                }
+                $table.appendChild($tr);
+            }
+            e.target.insertAdjacentElement("afterend", $table);
+        });
+    </script> -->
+
+
+
+
+    <button id="addTr">행 추가하기</button>
+    <!-- 테이블이 있을 때 추가해야해  -->
+
+    <!-- 선생님 풀이 -->
+
+    <!-- 다시 해보기....ㅜㅜ -->
+    <!-- 나는 div안에 테이블을 넣었으니까 테이블을 찾는 조건식이 달라져야해 -->
+    <script>
+
+        document.getElementById("addTr").addEventListener("click", (e) => {
+
+            // let table = document.getElementsByTagName("table");
+
+            // 테이블 생성 버튼과 행 추가하기 버튼 사이에 테이블이 있는지 확인
+            const preElement = e.target.previousElementSibling.children;
+            console.log(preElement);
+
+            if(preElement.tagName == "TABLE") {
+
+                const tr = document.createElement("tr");
+
+                for(let i=0; i < 5; i++) {
+
+                    let td = document.createElement("td");
+
+                    td.innerText = `${preElement.children.length}행 ${i}열`;
+                    tr.appendChild(td);
+                }
+                preElement.appendChild(tr);
+            } else {
+                alert("추가할 테이블이 없습니다");
+            }
+
+        });
+    </script>
+
+    
+    <h1>댓글 form 추가하기</h1>
+    <div id="con1">
+        <input type="text" id="comment">
+    <button id="addComment">댓글 달기</button>
+    </div>
+
+    <script>
+        document.getElementById("addComment").addEventListener("click", (e) => {
+
+            // 댓글 출력
+
+            let comment = document.getElementById("comment").value;
+
+            let p = document.createElement("p");
+
+            let text = document.createTextNode(comment);
+
+            p.appendChild(text);
+
+            document.getElementById("con1").insertAdjacentElement("beforeend", p);
+
+
+
+
+            // comment 옆에 추가 버튼 생성 
+
+            let button = document.createElement("button");
+            let buttontext = document.createTextNode("추가");
+            
+            button.appendChild(buttontext);
+            p.insertAdjacentElement("afterend", button);
+
+        });
+    </script>
+
+
+
+
+    <h1>댓글 추가하기 ( 선생님 풀이 )</h1> <!-- 다시 해보기 -->
+   <input type="text" name="reply" id="reply">
+   <button id="btn">등록</button>
+   <div></div>
+
+   <script>
+       document.getElementById("btn").addEventListener("click", e => {
+          
+            const target = e.target.nextElementSibling; // div 선택
+            
+            const p = document.createElement("p");
+
+            p.innerText = document.getElementById("reply").value;
+            // innerText는 텍스트노드의 값
+
+
+
+            // 답글 버튼 만들기
+            const btn = document.createElement("button");
+            btn.innerText = "답글";
+
+            const container = document.createElement("div");
+
+            p.style.display = "inline-block";
+            p.style.marginRight = "20px";
+
+            container.appendChild(p);
+
+
+            // 버튼에 이벤트 추가하기
+            btn.addEventListener("click", e => {
+
+                // alert("댓글버튼 클릭"); // 확인용
+
+                const input = document.createElement("input");
+
+                input.setAttribute("type", "text");
+                // id는 없어도 name 속성은 꼭 필요
+                
+                // e.target.parentElement.appendChild(input);
+                // e.target.parentElement 은 div
+
+                const container2 = document.createElement("div");
+                container2.appendChild(input);
+                const tn2 = document.createElement("button");
+                btn2 = innerText = "등록";
+
+                btn2.addEventListener("click", e => {
+
+                    const val = d.target.previousElementSibling.value;
+                    // 답글 input의 값을 가져온다
+                    const p2 = document.createElement("p");
+
+                    p2.innerText = val;
+                    pw.tsuyle.marginLeft = "20px"
+
+                });
+                container2.appendChild('btn2');
+
+                e.target.parentElement.insertAdjacentElement("afterend", input);
+            
+            });
+
+
+            container.appendChild(btn);
+
+            target.appendChild(container);
+
+            document.getElementById("reply").value = "";
+
+       });
+   </script>
+
+
+
+</body>
+</html>

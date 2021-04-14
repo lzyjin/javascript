@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 12</title>
+    <style>
+        th, td{
+            width: 100px;
+            height: 50px;
+        }
+
+        table{
+            border: 1px black solid;
+        }
+
+        th, td{
+            border: 1px black solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>객체 실습 문제</h1>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>주소</th>
+        </tr>
+        <tr id="tr1">
+            <td id="td1"></td>
+            <td id="td2"></td>
+            <td id="td3"></td>
+        </tr>
+        <tr id="tr2">
+            <td id="td1"></td>
+            <td id="td2"></td>
+            <td id="td3"></td>
+        </tr>
+        <tr id="tr3">
+            <td id="td1"></td>
+            <td id="td2"></td>
+            <td id="td3"></td>
+        </tr>
+    </table>
+
+    <caption>학생정보테이블</caption>
+
+    <button onclick="insert();">입력 및 출력</button>
+
+    <script>
+        
+        var student = {};
+        var arr = [];
+
+        const insert = () => {
+
+            var name;
+            var age;
+            var address;
+
+            for(let i=1; i <= 3; i++) {
+
+                name = prompt(`${i}번째 학생 이름 입력`);
+                age = prompt(`${i}번째 학생 나이 입력`);
+                address = prompt(`${i}번째 학생 주소 입력`);
+
+                student = {
+                    name: name,
+                    age: age,
+                    address: address
+                };
+
+                arr.push(student);
+            }
+            
+            
+
+            // i는 행
+            for(var i=1; i <= 3; i++) {
+
+                // 고생한 흔적들...
+                // let r = document.querySelector(`table>tr:nth-child(${i})`);
+                // let r = document.getElementById("tr"+i);
+                // console.log(r);
+                // console.log(document.querySelector(r+"+td"));
+                // i번째 tr 선택
+
+
+                // j는 열
+                for(var j=1; j <= 3; j++) {
+
+                    
+
+                    var d = document.querySelector("#tr"+i+">#td"+j);
+                    // i번째 tr 안에 있는 j번째 td선택 
+                    
+
+                    if(j == 1) {
+                        let text = document.createTextNode(arr[i-1].name);
+                        d.appendChild(text);
+                    } else if(j == 2) {
+                        let text = document.createTextNode(arr[i-1].age);
+                        d.appendChild(text);
+                    }else if(j == 3) {
+                        let text = document.createTextNode(arr[i-1].address);
+                        d.appendChild(text);
+                    }
+
+
+                }
+
+
+
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글창 만들기 뿅뿅</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+        div#container1{
+            border: 3px rgb(255, 57, 106) solid;
+        }
+        div#container2{
+            border: 2px rgb(255, 131, 178) solid;
+            margin: 20px;
+        }
+        div#container3{
+            border: 1px rgb(255, 181, 203) solid;
+            margin: 20px;
+        }
+        p{
+            margin-left: 70px;
+        }
+        h1{
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="reply"><button id="button1" onclick="printReply();">댓글입력</button>
+    <div id="container1"></div>
+    
+    <script>
+        const printReply = () => {
+
+            let div1 = $("div#container1");
+
+
+
+            let div2 = $(`<div id="container2"></div>`);
+
+                div1.append(div2);
+
+
+
+            let replyTxt = $("input#reply").val();
+
+                let reply = $(`<h1>${replyTxt}</h1>`);
+
+                div2.append(reply);
+
+
+
+            let button2 = $(`<button id="button2" onclick="addReReply(this);">답글추가</button>`);
+
+                reply.append(button2);
+            
+        }
+
+        const addReReply = (b2) => {
+
+            let div3 = $(`<div id="container3"></div>`);
+            
+            // console.log($(b).parent().parent()); // div2
+
+            let div2 = $(b2).parent().parent();
+
+                div2.append(div3);
+
+            let inputReReply = $("<input></input>");
+            let button3 = $(`<button id="button3" onclick="printReReply(this);">답글달기</button>`);
+
+                div3.append(inputReReply);
+                div3.append(button3);
+        }
+
+        const printReReply = (b3) => {
+
+            // console.log($(b3).parent().prev());
+
+            let reply = $(b3).parent().prev(); // h1 
+
+            let reReplyTxt = $(b3).prev().val();
+
+                //console.log(reReplyTxt);
+
+
+            let reReply = $(`<p>${reReplyTxt}</p>`);
+
+            reply.after(reReply);
+
+
+        }
+    </script>
+
+</body>
+</html>
